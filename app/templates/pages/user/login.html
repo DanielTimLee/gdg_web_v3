@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block title %}로그인{% endblock %}
+
+{% block content %}
+
+  <div class="ui stackable centered grid">
+    <div class="six wide column">
+
+      <h2 class="ui center aligned header" style="margin: 0em 0em;">
+        <i class="large icons">
+          <i class="sign in icon"></i>
+        </i>
+        로그인
+      </h2>
+
+      <form action="{{ request.url }}" method="POST" class="ui form{% if form.errors %} error{% endif %}" novalidate
+            style="margin:1em 0em">
+        {{ form.csrf_token }}
+        <div class="field{% if form.errors['username'] %} error{% endif %}">
+          <label>ID</label>
+          {{ form.username(placeholder="아이디를 입력해주세요", minlength="4") }}
+          {% if form.errors['username'] %}
+            <div class="ui user error message">
+              {% for error in form.errors['username'] %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="field{% if form.errors['password'] %} error{% endif %}">
+          <label>Password</label>
+          {{ form.password(placeholder="비밀번호를 입력해주세요", minlength="6", maxlength="20") }}
+          {% if form.errors['password'] %}
+            <div class="ui user error message">
+              {% for error in form.errors['password'] %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <button class="fluid ui primary button" type="submit">로그인</button>
+      </form>
+      <a href="{{ url_for('signup') }}" class="fluid ui animated fade teal button">
+        <div class="visible content">회원 가입</div>
+        <div class="hidden content">
+          <i class="right arrow icon"></i>
+        </div>
+      </a>
+    </div>
+  </div>
+
+{% endblock %}

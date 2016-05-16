@@ -1,0 +1,33 @@
+<div class="ui minimal comments">
+  <h3 class="ui dividing header">Comments</h3>
+  {% for comment in comments %}
+    <div class="comment">
+      <a class="avatar">
+        <img src="{{ url_for('static', filename='images/avatar/tom.jpg') }}">
+      </a>
+      <div class="content">
+        <a class="author">{{ comment.user_id | id_to_nickname }}</a>
+        <div class="metadata">
+          <span class="date">{{ comment.created_date | humanize }}</span>
+        </div>
+        <div class="text">
+          {{ comment.content }}
+        </div>
+        <div class="actions">
+          <a href="{{ url_for('comment_delete',board=document['board'],document_id=document.id,comment_id=comment.id) }}">삭제</a>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+
+
+  <form action="{{ request.url }}" method="POST" class="ui reply form{% if form.errors %} error{% endif %}">
+    {{ form.csrf_token }}
+    <div class="field{% if form.errors['content'] %} error{% endif %}">
+      {{ form.content(placeholder="내용을 입력해주세요") }}
+    </div>
+    <button class="ui blue labeled submit icon button" type="submit">
+      <i class="icon edit"></i>작성하기
+    </button>
+  </form>
+</div>

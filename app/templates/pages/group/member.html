@@ -1,0 +1,318 @@
+{% extends 'layout.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block style %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/member.css') }}"/>
+{% endblock %}
+
+{% block content %}
+  <div class="ui stackable grid">
+    <div class="three wide column">
+      {% include 'pages/group/sidebar.html' %}
+    </div>
+
+    <div class="thirteen wide column">
+      <h2 class="ui header">
+        <i class="user icon"></i>
+        <div class="content">
+          Member
+          <div class="sub header">GDG SSU의 회원입니다.</div>
+        </div>
+      </h2>
+      <div class="ui three column grid">
+
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui red ribbon small label">
+              GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/kyeongwan.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui red ribbon small label">
+              GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/kaeun.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui red ribbon small label">
+              GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/sangheck.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui orange ribbon small label">
+              전 GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/yujin.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui orange ribbon small label">
+              전 GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/wonkyun.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui orange ribbon small label">
+              전 GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/nayeon.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui orange ribbon small label">
+              전 GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/jongchan.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui orange ribbon small label">
+              전 GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/hyewon.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui orange ribbon small label">
+              전 GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/master_yang.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui orange ribbon small label">
+              전 GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/bwkim.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui orange ribbon small label">
+              전 GDG SSU Organizer
+            </div>
+            <img src="{{ url_for('static', filename='images/member/jakeyoon.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui green ribbon small label">
+              Samsung Software Membership
+            </div>
+            <img src="{{ url_for('static', filename='images/member/namyun.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui teal ribbon small label">
+              Semicolon First Leader
+            </div>
+            <img src="{{ url_for('static', filename='images/member/jinui.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui blue ribbon small label">
+              Software Maestro
+            </div>
+            <img src="{{ url_for('static', filename='images/member/chanwu.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui blue ribbon small label">
+              Software Maestro
+            </div>
+            <img src="{{ url_for('static', filename='images/member/juhong.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui blue ribbon small label">
+              Software Maestro
+            </div>
+            <img src="{{ url_for('static', filename='images/member/sunggwang.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui blue ribbon small label">
+              Software Maestro
+            </div>
+            <img src="{{ url_for('static', filename='images/member/wonjae.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui blue ribbon small label">
+              Software Maestro
+            </div>
+            <img src="{{ url_for('static', filename='images/member/hanter.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui teal ribbon small label">
+              최강 잉여
+            </div>
+            <img src="{{ url_for('static', filename='images/member/zinc.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui teal ribbon small label">
+              Start-up
+            </div>
+            <img src="{{ url_for('static', filename='images/member/seongwoo.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui blue ribbon small label">
+              Software Maestro
+            </div>
+            <img src="{{ url_for('static', filename='images/member/kyoungmun.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui teal ribbon small label">
+              LG CTO
+            </div>
+            <img src="{{ url_for('static', filename='images/member/sunmi.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui purple ribbon small label">
+              Microsoft Student Partners
+            </div>
+            <img src="{{ url_for('static', filename='images/member/hyemi.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui teal ribbon small label">
+              치즈군
+            </div>
+            <img src="{{ url_for('static', filename='images/member/gyuhwan.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui black ribbon small label">
+              Best of the Best
+            </div>
+            <img src="{{ url_for('static', filename='images/member/seolah.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui blue ribbon small label">
+              Software Maestro
+            </div>
+            <img src="{{ url_for('static', filename='images/member/gahye.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui blue ribbon small label">
+              Software Maestro
+            </div>
+            <img src="{{ url_for('static', filename='images/member/heeduck.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui purple ribbon small label">
+              Microsoft Student Partners
+            </div>
+            <img src="{{ url_for('static', filename='images/member/hanmilu.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui green ribbon small label">
+              Samsung Software Membership
+            </div>
+            <img src="{{ url_for('static', filename='images/member/daekyoung.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui blue ribbon small label">
+              Software Maestro
+            </div>
+            <img src="{{ url_for('static', filename='images/member/jingyu.png') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui teal ribbon small label">
+              자타공인 GDG 여신
+            </div>
+            <img src="{{ url_for('static', filename='images/member/minjung.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui teal ribbon small label">
+              서울영상고등학교
+            </div>
+            <img src="{{ url_for('static', filename='images/member/hongil.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui purple ribbon small label">
+              Microsoft Student Partners
+            </div>
+            <img src="{{ url_for('static', filename='images/member/youngjun.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui black ribbon small label">
+              Best of the Best
+            </div>
+            <img src="{{ url_for('static', filename='images/member/juhee.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui teal ribbon small label">
+              TOP
+            </div>
+            <img src="{{ url_for('static', filename='images/member/hoyeon.jpg') }}">
+          </div>
+        </div>
+        <div class="column">
+          <div class="ui image" id="img-container">
+            <div class="ui teal ribbon small label">
+              Freshman
+            </div>
+            <img src="{{ url_for('static', filename='images/member/kyungyoung.jpg') }}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+

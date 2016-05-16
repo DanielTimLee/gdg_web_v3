@@ -1,0 +1,50 @@
+<div class="ui inverted vertical footer segment">
+  <div class="ui center aligned container">
+    <div class="ui section divider"></div>
+    <div class="ui stackable inverted divided grid">
+      <div class="three wide column">
+        <h4 class="ui inverted header">About</h4>
+        <div class="ui inverted link list">
+          <a href="{{ url_for('about') }}" class="item">About</a>
+          <a href="{{ url_for('member') }}" class="item">Member</a>
+          <a href="{{ url_for('mission') }}" class="item">Mission</a>
+          <a href="{{ url_for('recruit') }}" class="item">Recruit</a>
+        </div>
+      </div>
+      <div class="three wide column">
+        <h4 class="ui inverted header">Board</h4>
+        <div class="ui inverted link list">
+          <a href="#" class="item">Notice</a>
+          <a href="#" class="item">Board</a>
+        </div>
+      </div>
+      <div class="eight wide left aligned column">
+        <h4 class="ui inverted header">Contacts</h4>
+        <p>
+          <a href="https://www.facebook.com/gdgkorea?ref=hl">
+            <i class="facebook icon"></i>
+          </a>
+          <a href="https://plus.google.com/u/0/communities/101463090584658665422">
+            <i class="google plus icon"></i>
+          </a>
+          <a href="https://www.youtube.com/channel/UCu3QGcALTC0FuXMma_dpK0A">
+            <i class="youtube icon"></i>
+          </a>
+        </p>
+        <p><a href=" mailto:gdgssu@gmail.com " target="_blank">gdgssu@gmail.com</a></p>
+        <p>
+          <a href=" https://www.google.co.kr/maps/place/%EC%84%9C%EC%9A%B8%ED%8A%B9%EB%B3%84%EC%8B%9C+%EB%8F%99%EC%9E%91%EA%B5%AC+%EC%83%81%EB%8F%841%EB%8F%99+510/@37.4943054,126.9592987,15z/data=!3m1!4b1!4m2!3m1!1s0x357ca1d4065591cb:0x69f6030d99956d32?hl=ko "
+             target="_blank">서울특별시 동작구 상도1동 501 숭실대학교 총동문회관 B1 G-Lab</a></p>
+      </div>
+    </div>
+    <div class="ui inverted section divider"></div>
+    <img src="{{ url_for('static', filename='images/logo1.png') }}" class="ui centered tiny image">
+    <div class="ui horizontal inverted small divided link list">
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>

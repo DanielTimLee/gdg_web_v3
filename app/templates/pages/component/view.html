@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ data['board'] }}{% endblock %}
+
+{% block content %}
+  <div class="ui stackable grid">
+    <div class="three wide column">
+      {% include 'pages/component/sidebar.html' %}
+    </div>
+
+    <div class="twelve wide column">
+      <h3 class="ui header">
+        <i class="write icon"></i>
+        <div class="content">
+          GDG SSU > {{ data['board'] }}
+        </div>
+      </h3>
+      <div class="ui very padded segment">
+        <h2 class="ui header">
+          {{ document.title }}
+          <div class="sub header">{{ document.user_id | id_to_nickname }}</div>
+          <div class="sub header">{{ document.created_date | humanize }}</div>
+        </h2>
+        <div class="ui divider"></div>
+        {{ document.content | safe }}
+        <div class="ui divider"></div>
+        <div class="ui text menu">
+          <div class="right menu"></div>
+          <a href="{{ url_for('document_delete',board=document['board'],document_id=document.id) }}">
+            <button class="ui right floated red button" type="submit">삭제하기</button>
+          </a>
+          <a href="{{ url_for('document_modify',board=document['board'],document_id=document.id) }}">
+            <button class="ui right floated teal button" type="submit">수정하기</button>
+          </a>
+        </div>
+      </div>
+      {% include 'pages/component/comment.html' %}
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}

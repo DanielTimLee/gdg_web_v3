@@ -1,0 +1,23 @@
+{
+  "name": "gdg_web",
+  "authors": [
+    "Daniel Tim Lee <danieltimlee@gmail.com>"
+  ],
+  "description": "gdg_web page",
+  "main": "server.py",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/static/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "semantic-ui": "^1.12.3"
+  }
+}

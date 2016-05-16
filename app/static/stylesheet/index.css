@@ -1,0 +1,19 @@
+.ui.huge.header {
+  font-size: 4.3em;
+  color: white;
+}
+
+.main-image {
+  max-width: 100%;
+  height: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 10em 0;
+}
+
+#map-canvas {
+  width: 100%;
+  height: 400px;
+  background-color: #CCC;
+}
+

@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+  <div class="ui stackable grid">
+    <div class="three wide column">
+      {% include 'pages/group/sidebar.html' %}
+    </div>
+    <div class="thirteen wide column">
+
+      <h2 class="ui header">
+        <i class="edit icon"></i>
+        <div class="content">
+          Recruit
+          <div class="sub header">GDG SSU 지원하기</div>
+        </div>
+      </h2>
+
+      <img class="ui image" src="{{ url_for('static', filename='images/recruit.jpg') }}">
+
+      <div class="ui segment">
+        <div class="ui two column middle aligned very relaxed stackable grid">
+          <div class="center aligned column">
+            <h2 class="ui icon center aligned header">
+              <a href="http://goo.gl/forms/f7sVqPkdYT">
+                <i class="keyboard icon"></i>
+                <div class="content">
+                  Developer
+                  <p></p>
+                  <div class="sub header">
+                    자신만의 주력 개발분야를 잡고<br/> 발전하는 학생 개발자.
+                  </div>
+                </div>
+              </a>
+            </h2>
+          </div>
+          <div class="ui vertical divider">
+            Or
+          </div>
+          <div class="center aligned column">
+            <h2 class="ui icon center aligned header">
+              <a href="http://goo.gl/forms/f7sVqPkdYT">
+                <i class="paint brush icon"></i>
+                <div class="content">
+                  Designer
+                  <p></p>
+                  <div class="sub header">
+                    자신만의 독특한 색깔을 유지하되, <br/>협업 할 수 있는 디자이너.
+                  </div>
+                </div>
+              </a>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

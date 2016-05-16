@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}대시보드{% endblock %}
+
+{% block content %}
+
+  <div class="ui container" style="margin:2em 0">
+    <div class="ui center aligned grid" style="margin: 1em 0;">
+      <h2 class="ui header">
+        <img src="{{ url_for('static', filename='images/avatar/tom.jpg') }}">
+        <div class="content">
+          {{ session['username'] }} 님 환영합니다
+          <div class="sub header">회원님의 대시보드입니다.</div>
+        </div>
+      </h2>
+    </div>
+    <div class="ui stackable divided three column center aligned grid">
+      <div class="column">
+        <a href="{{ url_for('my_document_list',page=1) }}">
+          <h2 class="ui icon header">
+            <i class="user icon"></i>
+            나의 담벼락
+            <div class="content">
+              <div class="sub header">내가 작성한 게시글을 확인하세요.</div>
+            </div>
+          </h2>
+        </a>
+      </div>
+      <div class="column">
+        <a href="{{ url_for('modify_pass') }}">
+          <h2 class="ui icon header">
+            <i class="privacy icon"></i>
+            <div class="content">
+              비밀번호 변경
+              <div class="sub header">6개월에 한번씩 비밀번호를 변경하세요.</div>
+            </div>
+          </h2>
+        </a>
+      </div>
+      <div class="column">
+        <a href="{{ url_for('modify_profile') }}">
+          <h2 class="ui icon header">
+            <i class="settings icon"></i>
+            <div class="content">
+              계정 설정
+              <div class="sub header">연락처와 이메일 등을 변경합니다.</div>
+            </div>
+          </h2>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock %}
+
+{% block script %}
+  <script data-main="{{ url_for('static', filename='script/page/page.view.js') }}"
+          src="{{ url_for('static', filename='lib/requirejs/require.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>GDG SSU - {% block title %}{% endblock %}</title>
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='lib/semantic-ui/dist/semantic.min.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/layout.css') }}"/>
+
+  {% block style %}
+  {% endblock %}
+</head>
+<body>
+
+{% include 'flash.html' %}
+
+{% block navbar %}
+  {% include 'navbar.html' %}
+{% endblock %}
+
+{% block image_content %}
+  <img class="ui nav image" src="{{ url_for('static', filename='images/gdgssu.png') }}">
+{% endblock %}
+
+<div class="ui container">
+  <div class="content" style="margin:3em 0em">
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>
+
+{% block footer %}
+  {% include 'footer.html' %}
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+<script type="text/javascript" src="{{ url_for('static', filename='lib/jquery/index.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='lib/semantic-ui/dist/semantic.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='js/util.js') }}"></script>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ data['board'] }}{% endblock %}
+
+{% block content %}
+  <div class="ui stackable grid">
+    <div class="three wide column">
+      {% include 'pages/component/sidebar.html' %}
+    </div>
+
+    <div class="thirteen wide column">
+      <h3 class="ui header">
+        <i class="write icon"></i>
+        <div class="content">
+          GDG SSU > {{ data['board'] }} > 새 글 작성하기
+        </div>
+      </h3>
+      <div class="ui very padded segment">
+        <form action="{{ request.url }}" method="POST" class="ui form{% if form.errors %} error{% endif %}" novalidate
+              style="margin:1em 0em">
+          {{ form.csrf_token }}
+          <div class="ui big fluid input{% if form.errors['username'] %} error{% endif %}">
+            {{ form.title(placeholder="제목을 입력해주세요") }}
+          </div>
+          <div class="ui divider"></div>
+          <div class="field{% if form.errors['content'] %} error{% endif %}">
+            {{ form.content(placeholder="내용을 입력해주세요") }}
+          </div>
+          <div class="ui text menu">
+            <div class="right menu"></div>
+            <button class="ui red button" type="reset">삭제하기</button>
+            <button class="ui teal button" type="submit">작성하기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'layout.html' %}
+
+{% block title %}About{% endblock %}
+
+{% block style %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/index.css') }}"/>
+  <style>
+    .main1 {
+      background-image: url({{ url_for('static', filename='images/hero.jpeg') }});
+      padding: 20em 0;
+    }
+
+    .main2 {
+      background-image: url({{ url_for('static', filename='images/twitter-feed.jpg') }});
+    }
+
+    .main3 {
+      background-image: url({{ url_for('static', filename='images/rockstar-speakers.jpg') }});
+    }
+  </style>
+{% endblock %}
+
+{% block image_content %}
+
+  <div class="main1 main-image">
+    <div class="ui center aligned huge header">
+      Google Developer Group SSU
+    </div>
+    <h2 class="ui centered inverted large header">
+      We are making and dreaming a Paradise for Student Developers
+    </h2>
+  </div>
+  <div class="main2 main-image">
+    <h2 class="ui icon center aligned header">
+      <a href="https://plus.google.com/communities/101463090584658665422">
+        <i class="google plus red icon"></i>
+      </a>
+    </h2>
+    <div class="ui center aligned huge header">
+      <a href="https://plus.google.com/u/0/communities/101463090584658665422">#GDG SSU</a> 에서 일어나는 일을 알고 싶다면?
+    </div>
+    <h2 class="ui centered grey inverted header">
+      Google 계정으로 쉽게 연동되는 Google+에 가입하시고 위 링크의 GDG SSU 커뮤니티로 찾아오세요!
+    </h2>
+  </div>
+  <div class="main3 main-image">
+    <div class="ui center aligned huge header" style="margin-bottom:1em;">
+      GDG SSU 사람들
+    </div>
+    <div class="ui four column grid">
+      <div class="row" style="margin: 1.5em 0em;">
+        <div class="center aligned column">
+          <img class="ui small centered circular image"
+               src="{{ url_for('static', filename='images/member/kyeongwan.jpg') }}">
+        </div>
+        <div class="center aligned column">
+          <img class="ui small centered circular image"
+               src="{{ url_for('static', filename='images/member/kaeun.jpg') }}">
+        </div>
+        <div class="center aligned column">
+          <img class="ui small centered circular image"
+               src="{{ url_for('static', filename='images/member/sangheck.png') }}">
+        </div>
+        <div class="center aligned column">
+          <img class="ui small centered circular image"
+               src="{{ url_for('static', filename='images/member/wonkyun.png') }}">
+        </div>
+      </div>
+      <div class="centered row">
+        <a href="{{ url_for ('member') }}">
+          <button class="ui grey inverted basic button">GDG SSU 모든 멤버 보기</button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div id="map-canvas">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/google_map.js') }}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div style="margin: -3em 0em;"></div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

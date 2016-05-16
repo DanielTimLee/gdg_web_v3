@@ -1,0 +1,15 @@
+.user.error.message {
+  box-shadow: none;
+  background-color: transparent;
+  padding: 0;
+  margin-top: .2em;
+}
+
+a {
+  color: inherit;
+}
+
+.ui.nav.image {
+  width: 100%;
+  height: auto;
+}

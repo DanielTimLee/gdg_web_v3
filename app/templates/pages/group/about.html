@@ -1,0 +1,101 @@
+{% extends 'layout.html' %}
+
+{% block title %}About{% endblock %}
+
+
+{% block style %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/about.css') }}"/>
+  <style>
+    #row2 {
+      background-image: url({{ url_for('static', filename='images/statistic.jpg') }});
+      background-size: 912px auto;
+      background-repeat: no-repeat;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div class="ui stackable grid">
+    <div class="three wide column">
+      {% include 'pages/group/sidebar.html' %}
+    </div>
+
+    <div class="thirteen wide column">
+      <h2 class="ui header">
+        <i class="write icon"></i>
+        <div class="content">
+          About
+          <div class="sub header">GDG SSU에 대한 소개</div>
+        </div>
+      </h2>
+      <div class="ui three column grid">
+        <div class="row">
+          <div class="center aligned column">
+            <p></p>
+            <div class="ui center aligned tiny header">
+              학생 개발자 & 디자이너
+            </div>
+            <img class="ui small centered circular image" src="{{ url_for('static', filename='images/dnd.jpg') }}">
+            그냥 학생이라고 하기엔 뭔가 독특합니다. SW 분야를 전공하는 학생으로 자신만의 꿈과 목표가 명확하며 그저 배우는 것 뿐만이 아닌, 자신만의 주력분야를 가지고 실질적인 SW 개발/디자인을
+            진행합니다. 우리는 우리 스스로를 평범한 학생이 아닌 학생 개발자/디자이너라고 칭합니다.
+          </div>
+          <div class="column">
+            <p></p>
+            <div class="ui center aligned tiny header">
+              수많은 능력자
+            </div>
+            <img class="ui small centered circular image" src="{{ url_for('static', filename='images/stronger.jpg') }}">
+            CS 전공자들에게 널리 알려진 SW Maestro 과정이나 삼성 소프트웨어 멤버십, Best of Best와 같은 연수과정을 거친 학생들이 이곳에 모여있습니다. 그리고 대학을 졸업하지 않았음에도
+            자신만의 아이템을 가지고 SW 창업을 진행하거나, 우리가 익히들은 Naver / 삼성전자 / LG전자 / Evernote / Nexon 등의 기업체에서 활약을 하는 능력자가 있습니다.
+          </div>
+          <div class="column">
+            <p></p>
+            <div class="ui center aligned tiny header">
+              With Google
+            </div>
+            <p></p>
+            <img class="ui small centered circular image"
+                 src="{{ url_for('static', filename='images/with_google.jpg') }}">
+            GDG SSU는 이름에서도 느껴지다시피 Google의 지원을 받으며 개발자로서 유익하고 의미있는 활동을 지속해왔습니다. GDG SSU의 일원이 되면 최고의 개발자라 일컫어지는 Googler를
+            만나서 인연을 맺고 도움을 받는 기회 또한 얻게됩니다.
+          </div>
+        </div>
+      </div>
+
+      <div class="row" id="row2">
+        <div class="ui four column grid">
+          <div class="center aligned column">
+            <div class="ui center aligned blue inverted huge header">250+</div>
+            <div class="ui center aligned grey inverted small header">- Person -</div>
+            <p>
+            <p></p></p>
+            GDG SSU는 우리가 마련한 가치있는 이벤트에서 많은 사람들을 모으고 그들이 좋은 추억과 경험을 가질 수 있는 기회를 제공했습니다. 1회 평균 250명, 현재까지 약 2700명 이상의 학생들을
+            만나왔습니다.
+          </div>
+          <div class="center aligned column">
+            <div class="ui center aligned blue inverted huge header">50+</div>
+            <div class="ui center aligned grey inverted small header">- Events -</div>
+            <p>
+            <p></p></p>
+            설립한지 4년, 길지 않은 시간이었지만 GDG SSU는 학생개발자들의 발전을 위하여 유익한 개발자 행사를 수 차례 주최해왔습니다. GDG SSU는 그룹의 일원으로서 가입하는 것 뿐만이 아닌
+            이러한 이벤트에 참여하는 방식 역시 의미가 있습니다.
+          </div>
+          <div class="center aligned column">
+            <div class="ui center aligned blue inverted huge header">43+</div>
+            <div class="ui center aligned grey inverted small header">- Members -</div>
+            <p>
+            <p></p></p>
+            GDG SSU에는 좋은 멤버들의 숫자가 나날히 늘어가고 있습니다. 기존에 이 분야를 업으로 삼아온 사람들, 그 앞선 사람들의 등을 보고 따르며 성장하는 사람들 모두 말이지요.
+          </div>
+          <div class="center aligned column">
+            <div class="ui center aligned blue inverted huge header">3+</div>
+            <div class="ui center aligned grey inverted small header">- 3 Campus Couple -</div>
+            <p>
+            <p></p></p>
+            젊은 대학생 시절을 사랑에 불태우는 사람들이 많습니다. GDG SSU에는 개발뿐만 아니라 동아리 내에서 뜨거운 연애를 진행중인 커플이 많습니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

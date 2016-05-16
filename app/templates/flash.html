@@ -1,0 +1,10 @@
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div class="ui attached small nag">
+      {% for message in messages %}
+        <span style="color:white">{{ message }}</span>
+      {% endfor %}
+      <i class="close icon"></i> 
+    </div>
+  {% endif %}
+{% endwith %}

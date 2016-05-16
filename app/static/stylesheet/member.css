@@ -1,0 +1,10 @@
+.ui.image img {
+  weight: 232px;
+  height: auto;
+}
+
+#img-container {
+  weight: 232px;
+  height: 200px;
+  overflow: hidden;
+}

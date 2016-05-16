@@ -1,0 +1,91 @@
+{% extends 'layout.html' %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+
+  <div class="ui stackable centered grid">
+    <div class="six wide column">
+
+      <h2 class="ui center aligned header" style="margin: 1em 0em;">
+        <i class="large icons">
+          <i class="member icon"></i>
+        </i>
+        회원 가입
+      </h2>
+
+      <form action="{{ request.url }}" method="POST" class="ui form{% if form.errors %} error{% endif %}" novalidate
+            style="margin:1em 0em">
+        {{ form.csrf_token }}
+        <div class="field{% if form.errors['username'] %} error{% endif %}">
+          <label>ID</label>
+          {{ form.username(placeholder="아이디를 입력해주세요", minlength="4") }}
+          {% if form.errors['username'] %}
+            <div class="ui user error message">
+              {% for error in form.errors['username'] %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="field{% if form.errors['password'] %} error{% endif %}">
+          <label>Password</label>
+          {{ form.password(placeholder="비밀번호를 입력해주세요", minlength="6", maxlength="20") }}
+          {% if form.errors['password'] %}
+            <div class="ui user error message">
+              {% for error in form.errors['password'] %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="field{% if form.errors['confirm_password'] %} error{% endif %}">
+          <label>Confirm Password</label>
+          {{ form.confirm_password(placeholder="비밀번호를 다시 입력해주세요", **{'data-rule-equalTo': "input[name='password']"}) }}
+          {% if form.errors['confirm_password'] %}
+            <div class="ui user error message">
+              {% for error in form.errors['confirm_password'] %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="field{% if form.errors['name'] %} error{% endif %}">
+          <label>이름</label>
+          {{ form.name(placeholder="홍길동") }}
+          {% if form.errors['name'] %}
+            <div class="ui user error message">
+              {% for error in form.errors['name'] %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="field{% if form.errors['nickname'] %} error{% endif %}">
+          <label>닉네임</label>
+          {{ form.nickname(placeholder="닉네임") }}
+          {% if form.errors['nickname'] %}
+            <div class="ui user error message">
+              {% for error in form.errors['nickname'] %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <div class="field{% if form.errors['email'] %} error{% endif %}">
+          <label>E-mail</label>
+          {{ form.email(placeholder="@ssu.ac.kr") }}
+          {% if form.errors['email'] %}
+            <div class="ui user error message">
+              {% for error in form.errors['email'] %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+        <button class="fluid ui primary button" type="submit">가입하기</button>
+      </form>
+    </div>
+  </div>
+
+{% endblock %}

@@ -1,0 +1,16 @@
+.ui.small.image {
+  margin: 1em auto;
+  height: 130px;
+  width: 130px;
+}
+
+#row2 {
+  margin: 3em 0em;
+  padding: 3em 1em;
+  color: snow;
+  line-height: 2em;
+}
+
+.ui.huge.header {
+  font-size: 3.5em;
+}

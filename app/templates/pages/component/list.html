@@ -1,0 +1,68 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ data['board'] }}{% endblock %}
+
+{% block content %}
+
+  <div class="ui stackable grid">
+    <div class="three wide column">
+      {% include 'pages/component/sidebar.html' %}
+    </div>
+
+    <div class="thirteen wide column">
+      <h3 class="ui header">
+        <i class="write icon"></i>
+        <div class="content">
+          GDG SSU > {{ data['board'] }}
+        </div>
+      </h3>
+      <table class="ui selectable single line table">
+        <thead>
+        <tr>
+          <th><i class="list icon"></i></th>
+          <th>Title</th>
+          <th><i class="users icon"></i></th>
+          <th><i class="unhide icon"></i></th>
+          <th><i class="calendar icon"></i></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for document in document_list %}
+          <tr>
+            <td>
+              {{ pagination['start_index'] - (loop.index -1)}}
+            </td>
+            <td>
+              <a href="{{ url_for('document_view',board=document['board'],document_id=document['id']) }}">
+                {{ document['title'] }}
+              </a>
+            </td>
+            <td>{{ document['user_id'] | id_to_nickname }}</td>
+            <td>{{ document['read_count'] }}</td>
+            <td>{{ document['created_date'] | humanize }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="ui pagination menu">
+        {% for page in range(pagination['page']) %}
+          <a href="{{ url_for('document_list', board=data['board'], page=(page+1)) }}"
+             class="item {% if page == pagination.current %} active {% endif %}">
+            {{ page+1 }}
+          </a>
+        {% endfor %}
+      </div>
+      {% if data['board'] != 'mypage' %}
+        <a href="{{ url_for('document_write', board=data['board']) }}">
+          <button class="ui right floated button" type="submit">글 작성하기</button>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+{% endblock %}
+
+
+{% block script %}
+{% endblock %}
