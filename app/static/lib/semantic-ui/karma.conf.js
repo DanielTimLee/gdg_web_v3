@@ -1,5 +1,5 @@
 // Karma configuration
-module.exports = function (config) {
+module.exports = function(config) {
   config.set({
 
     // base path, that will be used to resolve files and exclude
@@ -22,9 +22,9 @@ module.exports = function (config) {
       'test/helpers/*.js',
       // require fixtures
       {
-        pattern: 'test/fixtures/*.html',
-        included: false,
-        served: true
+        pattern  : 'test/fixtures/*.html',
+        included : false,
+        served   : true
       },
       // require spec
       'test/modules/module.spec.js',

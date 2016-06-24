@@ -1,27 +1,27 @@
 /*!
- * # Semantic UI 2.1.7 - Item
+ * # Semantic UI 1.12.3 - Item
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributorss
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
 
+
 /*******************************
             Standard
 *******************************/
+
 
 /*--------------
       Item
 ---------------*/
 
 .ui.items > .item {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  table-layout: fixed;
+  display: table;
   margin: 1em 0em;
   width: 100%;
   min-height: 0px;
@@ -30,11 +30,10 @@
   border: none;
   border-radius: 0rem;
   box-shadow: none;
-  -webkit-transition: box-shadow 0.1s ease;
-  transition: box-shadow 0.1s ease;
+  -webkit-transition: box-shadow 0.2s ease;
+          transition: box-shadow 0.2s ease;
   z-index: '';
 }
-
 .ui.items > .item a {
   cursor: pointer;
 }
@@ -46,11 +45,9 @@
 .ui.items {
   margin: 1.5em 0em;
 }
-
 .ui.items:first-child {
   margin-top: 0em !important;
 }
-
 .ui.items:last-child {
   margin-bottom: 0em !important;
 }
@@ -59,6 +56,9 @@
       Item
 ---------------*/
 
+.ui.items > .item {
+  min-width: 100%;
+}
 .ui.items > .item:after {
   display: block;
   content: ' ';
@@ -67,11 +67,9 @@
   overflow: hidden;
   visibility: hidden;
 }
-
 .ui.items > .item:first-child {
   margin-top: 0em;
 }
-
 .ui.items > .item:last-child {
   margin-bottom: 0em;
 }
@@ -82,20 +80,13 @@
 
 .ui.items > .item > .image {
   position: relative;
-  -webkit-box-flex: 0;
-  -webkit-flex: 0 0 auto;
-  -ms-flex: 0 0 auto;
-  flex: 0 0 auto;
-  display: block;
+  display: table-cell;
   float: none;
   margin: 0em;
   padding: 0em;
   max-height: '';
-  -webkit-align-self: top;
-  -ms-flex-item-align: top;
-  align-self: top;
+  vertical-align: top;
 }
-
 .ui.items > .item > .image > img {
   display: block;
   width: 100%;
@@ -103,7 +94,6 @@
   border-radius: 0.125rem;
   border: none;
 }
-
 .ui.items > .item > .image:only-child > img {
   border-radius: 0rem;
 }
@@ -114,10 +104,6 @@
 
 .ui.items > .item > .content {
   display: block;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
   background: none;
   margin: 0em;
   padding: 0em;
@@ -126,7 +112,6 @@
   border: none;
   border-radius: 0em;
 }
-
 .ui.items > .item > .content:after {
   display: block;
   content: ' ';
@@ -135,21 +120,16 @@
   overflow: hidden;
   visibility: hidden;
 }
-
 .ui.items > .item > .image + .content {
-  min-width: 0;
-  width: auto;
-  display: block;
+  width: 100%;
+  display: table-cell;
   margin-left: 0em;
-  -webkit-align-self: top;
-  -ms-flex-item-align: top;
-  align-self: top;
+  vertical-align: top;
   padding-left: 1.5em;
 }
-
 .ui.items > .item > .content > .header {
-  display: inline-block;
-  margin: -0.21425em 0em 0em;
+  display: block;
+  margin: -0.165em 0em 0em;
   font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
   color: rgba(0, 0, 0, 0.85);
@@ -157,7 +137,7 @@
 
 /* Default Header Size */
 .ui.items > .item > .content > .header:not(.ui) {
-  font-size: 1.28571429em;
+  font-size: 1.2em;
 }
 
 /*--------------
@@ -167,7 +147,6 @@
 .ui.items > .item [class*="left floated"] {
   float: left;
 }
-
 .ui.items > .item [class*="right floated"] {
   float: right;
 }
@@ -177,12 +156,9 @@
 ---------------*/
 
 .ui.items > .item .content img {
-  -webkit-align-self: middle;
-  -ms-flex-item-align: middle;
-  align-self: middle;
+  vertical-align: middle;
   width: '';
 }
-
 .ui.items > .item img.avatar,
 .ui.items > .item .avatar img {
   width: '';
@@ -196,10 +172,10 @@
 
 .ui.items > .item > .content > .description {
   margin-top: 0.6em;
-  max-width: auto;
+  max-width: 550px;
   font-size: 1em;
-  line-height: 1.4285em;
-  color: rgba(0, 0, 0, 0.87);
+  line-height: 1.33;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 /*--------------
@@ -209,7 +185,6 @@
 .ui.items > .item > .content p {
   margin: 0em 0em 0.5em;
 }
-
 .ui.items > .item > .content p:last-child {
   margin-bottom: 0em;
 }
@@ -219,20 +194,16 @@
 ---------------*/
 
 .ui.items > .item .meta {
-  margin: 0.5em 0em 0.5em;
   font-size: 1em;
   line-height: 1em;
   color: rgba(0, 0, 0, 0.6);
 }
-
 .ui.items > .item .meta * {
   margin-right: 0.3em;
 }
-
 .ui.items > .item .meta :last-child {
   margin-right: 0em;
 }
-
 .ui.items > .item .meta [class*="right floated"] {
   margin-right: 0em;
   margin-left: 0.3em;
@@ -242,13 +213,13 @@
       Links
 ---------------*/
 
+
 /* Generic */
 .ui.items > .item > .content a:not(.ui) {
   color: '';
-  -webkit-transition: color 0.1s ease;
-  transition: color 0.1s ease;
+  -webkit-transition: color 0.2s ease;
+          transition: color 0.2s ease;
 }
-
 .ui.items > .item > .content a:not(.ui):hover {
   color: '';
 }
@@ -257,58 +228,55 @@
 .ui.items > .item > .content > a.header {
   color: rgba(0, 0, 0, 0.85);
 }
-
 .ui.items > .item > .content > a.header:hover {
-  color: #1e70bf;
+  color: #00b2f3;
 }
 
 /* Meta */
 .ui.items > .item .meta > a:not(.ui) {
   color: rgba(0, 0, 0, 0.4);
 }
-
 .ui.items > .item .meta > a:not(.ui):hover {
-  color: rgba(0, 0, 0, 0.87);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 /*--------------
      Labels
 ---------------*/
 
+
 /*-----Star----- */
+
 
 /* Icon */
 .ui.items > .item > .content .favorite.icon {
   cursor: pointer;
   opacity: 0.75;
-  -webkit-transition: color 0.1s ease;
-  transition: color 0.1s ease;
+  -webkit-transition: color 0.2s ease;
+          transition: color 0.2s ease;
 }
-
 .ui.items > .item > .content .favorite.icon:hover {
   opacity: 1;
   color: #ffb70a;
 }
-
 .ui.items > .item > .content .active.favorite.icon {
   color: #ffe623;
 }
 
 /*-----Like----- */
 
+
 /* Icon */
 .ui.items > .item > .content .like.icon {
   cursor: pointer;
   opacity: 0.75;
-  -webkit-transition: color 0.1s ease;
-  transition: color 0.1s ease;
+  -webkit-transition: color 0.2s ease;
+          transition: color 0.2s ease;
 }
-
 .ui.items > .item > .content .like.icon:hover {
   opacity: 1;
   color: #ff2733;
 }
-
 .ui.items > .item > .content .active.like.icon {
   color: #ff2733;
 }
@@ -328,19 +296,16 @@
   left: 0em;
   color: rgba(0, 0, 0, 0.4);
   box-shadow: none;
-  -webkit-transition: color 0.1s ease;
-  transition: color 0.1s ease;
+  -webkit-transition: color 0.2s ease;
+          transition: color 0.2s ease;
   border-top: none;
 }
-
 .ui.items > .item .extra > * {
   margin: 0.25rem 0.5rem 0.25rem 0em;
 }
-
 .ui.items > .item .extra > [class*="right floated"] {
   margin: 0.25rem 0em 0.25rem 0.5rem;
 }
-
 .ui.items > .item .extra:after {
   display: block;
   content: ' ';
@@ -350,9 +315,11 @@
   visibility: hidden;
 }
 
+
 /*******************************
           Responsive
 *******************************/
+
 
 /* Default Image Width */
 .ui.items > .item > .image:not(.ui) {
@@ -364,11 +331,9 @@
   .ui.items > .item {
     margin: 1em 0em;
   }
-
   .ui.items > .item > .image:not(.ui) {
     width: 150px;
   }
-
   .ui.items > .item > .image + .content {
     display: block;
     padding: 0em 0em 0em 1em;
@@ -378,57 +343,43 @@
 /* Mobily Only */
 @media only screen and (max-width: 767px) {
   .ui.items > .item {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
     margin: 2em 0em;
   }
-
   .ui.items > .item > .image {
     display: block;
     margin-left: auto;
     margin-right: auto;
   }
-
   .ui.items > .item > .image,
   .ui.items > .item > .image > img {
     max-width: 100% !important;
     width: auto !important;
     max-height: 250px !important;
   }
-
   .ui.items > .item > .image + .content {
     display: block;
     padding: 1.5em 0em 0em;
   }
 }
 
+
 /*******************************
            Variations
 *******************************/
+
 
 /*-------------------
        Aligned
 --------------------*/
 
 .ui.items > .item > .image + [class*="top aligned"].content {
-  -webkit-align-self: flex-start;
-  -ms-flex-item-align: start;
-  align-self: flex-start;
+  vertical-align: top;
 }
-
 .ui.items > .item > .image + [class*="middle aligned"].content {
-  -webkit-align-self: center;
-  -ms-flex-item-align: center;
-  align-self: center;
+  vertical-align: middle;
 }
-
 .ui.items > .item > .image + [class*="bottom aligned"].content {
-  -webkit-align-self: flex-end;
-  -ms-flex-item-align: end;
-  align-self: flex-end;
+  vertical-align: bottom;
 }
 
 /*--------------
@@ -438,7 +389,6 @@
 .ui.relaxed.items > .item {
   margin: 1.5em 0em;
 }
-
 .ui[class*="very relaxed"].items > .item {
   margin: 2em 0em;
 }
@@ -448,17 +398,15 @@
 --------------------*/
 
 .ui.divided.items > .item {
-  border-top: 1px solid rgba(34, 36, 38, 0.15);
+  border-top: 1px solid rgba(39, 41, 43, 0.15);
   margin: 0em;
   padding: 1em 0em;
 }
-
 .ui.divided.items > .item:first-child {
   border-top: none;
   margin-top: 0em !important;
   padding-top: 0em !important;
 }
-
 .ui.divided.items > .item:last-child {
   margin-bottom: 0em !important;
   padding-bottom: 0em !important;
@@ -469,7 +417,6 @@
   margin: 0em;
   padding: 1.5em 0em;
 }
-
 .ui[class*="very relaxed"].divided.items > .item {
   margin: 0em;
   padding: 2em 0em;
@@ -483,10 +430,9 @@
 .ui.link.items > .item:hover {
   cursor: pointer;
 }
-
 .ui.items a.item:hover .content .header,
 .ui.link.items > .item:hover .content .header {
-  color: #1e70bf;
+  color: #00b2f3;
 }
 
 /*--------------
@@ -497,9 +443,12 @@
   font-size: 1em;
 }
 
+
 /*******************************
          Theme Overrides
 *******************************/
+
+
 
 /*******************************
     User Variable Overrides

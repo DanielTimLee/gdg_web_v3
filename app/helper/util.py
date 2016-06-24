@@ -50,8 +50,9 @@ def login_required(f):
 
 @app.add_template_filter
 def humanize(time):
+    now=arrow.utcnow()
     time = arrow.get(time)
-    return time.humanize(locale='ko')
+    return now.humanize(time,locale='ko')
 
 
 @app.add_template_filter

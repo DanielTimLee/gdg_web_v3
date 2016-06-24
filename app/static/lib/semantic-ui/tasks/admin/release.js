@@ -1,21 +1,21 @@
 /*******************************
- Release
- *******************************/
+          Release
+*******************************/
 
 /*
  This task update all SUI individual component repos with new versions of components
 
- * Initializes repositories with current versions
- * Creates local files at ../distributions/ with each repo for release
+  * Initializes repositories with current versions
+  * Creates local files at ../distributions/ with each repo for release
 
- */
+*/
 
 var
   runSequence = require('run-sequence')
-  ;
+;
 
 /* Release All */
-module.exports = function (callback) {
+module.exports = function(callback) {
 
   runSequence(
     //'build', // build Semantic

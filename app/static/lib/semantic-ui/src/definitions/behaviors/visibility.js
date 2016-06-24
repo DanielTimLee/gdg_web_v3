@@ -3,7 +3,7 @@
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
@@ -37,7 +37,6 @@
           className = settings.className,
           namespace = settings.namespace,
           error = settings.error,
-          metadata = settings.metadata,
 
           eventNamespace = '.' + namespace,
           moduleNamespace = 'module-' + namespace,
@@ -46,10 +45,8 @@
 
           $module = $(this),
           $context = $(settings.context),
-
-          $placeholder,
-
           selector = $module.selector || '',
+
           instance = $module.data(moduleNamespace),
 
           requestAnimationFrame = window.requestAnimationFrame
@@ -61,8 +58,6 @@
             },
 
           element = this,
-          disabled = false,
-
           observer,
           module
           ;
@@ -73,27 +68,23 @@
             module.debug('Initializing', settings);
 
             module.setup.cache();
+            module.save.position();
 
             if (module.should.trackChanges()) {
-
+              module.bind.events();
               if (settings.type == 'image') {
                 module.setup.image();
-              }
+            }
               if (settings.type == 'fixed') {
                 module.setup.fixed();
               }
-
               if (settings.observeChanges) {
                 module.observeChanges();
               }
-              module.bind.events();
-            }
-
-            module.save.position();
-            if (!module.is.visible()) {
+              if (!module.is.visible()) {
               module.error(error.visible, $module);
             }
-
+            }
             if (settings.initialCheck) {
               module.checkVisibility();
             }
@@ -117,9 +108,7 @@
               .off('load' + eventNamespace, module.event.load)
               .off('resize' + eventNamespace, module.event.resize)
             ;
-            $context
-              .off('scrollchange' + eventNamespace, module.event.scrollchange)
-            ;
+            $context.off('scrollchange' + eventNamespace, module.event.scrollchange);
             $module
               .off(eventNamespace)
               .removeData(moduleNamespace)
@@ -127,6 +116,9 @@
           },
 
           observeChanges: function () {
+            var
+              context = $context[0]
+              ;
             if ('MutationObserver' in window) {
               observer = new MutationObserver(function (mutations) {
                 module.verbose('DOM tree modified, updating visibility calculations');
@@ -146,30 +138,56 @@
           bind: {
             events: function () {
               module.verbose('Binding visibility events to scroll and resize');
-              if (settings.refreshOnLoad) {
-                $window
-                  .on('load' + eventNamespace, module.event.load)
-                ;
-              }
-              $window
-                .on('resize' + eventNamespace, module.event.resize)
-              ;
+            $window
+              .on('load' + eventNamespace, module.event.load)
+              .on('resize' + eventNamespace, module.event.resize)
+            ;
               // pub/sub pattern
-              $context
-                .off('scroll' + eventNamespace)
-                .on('scroll' + eventNamespace, module.event.scroll)
-                .on('scrollchange' + eventNamespace, module.event.scrollchange)
+            $context
+              .off('scroll' + eventNamespace)
+              .on('scroll' + eventNamespace, module.event.scroll)
+              .on('scrollchange' + eventNamespace, module.event.scrollchange)
+            ;
+          },
+            imageLoad: function () {
+              var
+                $images = $module.find('img'),
+                imageCount = $images.length,
+                index = imageCount,
+                loadedCount = 0,
+                images = [],
+                cache = [],
+                cacheImage = document.createElement('img'),
+                handleLoad = function () {
+                  loadedCount++;
+                  if (loadedCount >= imageCount) {
+                    module.debug('Images finished loading inside element, refreshing position');
+                  module.refresh();
+                  }
+              }
+                ;
+              if (imageCount > 0) {
+                $images
+                  .each(function () {
+                    images.push($(this).attr('src'));
+                  })
               ;
+                while (index--) {
+                  cacheImage = document.createElement('img');
+                  cacheImage.onload = handleLoad;
+                  cacheImage.onerror = handleLoad;
+                  cacheImage.src = images[index];
+                  cache.push(cacheImage);
+                }
+            }
             }
           },
 
           event: {
             resize: function () {
               module.debug('Window resized');
-              if (settings.refreshOnResize) {
-                requestAnimationFrame(module.refresh);
-              }
-            },
+              requestAnimationFrame(module.refresh);
+          },
             load: function () {
               module.debug('Page finished loading');
               requestAnimationFrame(module.refresh);
@@ -179,19 +197,19 @@
               if (settings.throttle) {
                 clearTimeout(module.timer);
                 module.timer = setTimeout(function () {
-                  $context.triggerHandler('scrollchange' + eventNamespace, [$context.scrollTop()]);
+                  $context.trigger('scrollchange' + eventNamespace, [$context.scrollTop()]);
                 }, settings.throttle);
-              }
+            }
               else {
                 requestAnimationFrame(function () {
-                  $context.triggerHandler('scrollchange' + eventNamespace, [$context.scrollTop()]);
+                  $context.trigger('scrollchange' + eventNamespace, [$context.scrollTop()]);
                 });
-              }
-            },
+            }
+          },
             // subscribes to scrollchange
             scrollchange: function (event, scrollPosition) {
               module.checkVisibility(scrollPosition);
-            },
+          },
           },
 
           precache: function (images, callback) {
@@ -209,8 +227,8 @@
                   if ($.isFunction(callback)) {
                     callback();
                   }
-                }
               }
+            }
               ;
             while (imagesLength--) {
               cacheImage = document.createElement('img');
@@ -221,22 +239,12 @@
             }
           },
 
-          enableCallbacks: function () {
-            module.debug('Allowing callbacks to occur');
-            disabled = false;
-          },
-
-          disableCallbacks: function () {
-            module.debug('Disabling all callbacks temporarily');
-            disabled = true;
-          },
-
           should: {
             trackChanges: function () {
               if (methodInvoked) {
                 module.debug('One time query, no need to bind events');
                 return false;
-              }
+            }
               module.debug('Callbacks being attached');
               return true;
             }
@@ -249,40 +257,34 @@
                 screen: {},
                 element: {},
               };
-            },
+          },
             image: function () {
               var
-                src = $module.data(metadata.src)
+                src = $module.data('src')
                 ;
               if (src) {
                 module.verbose('Lazy loading image', src);
-                settings.once = true;
                 settings.observeChanges = false;
-
                 // show when top visible
-                settings.onOnScreen = function () {
-                  module.debug('Image on screen', element);
+                module.topVisible(function () {
+                  module.debug('Image top visible', element);
                   module.precache(src, function () {
                     module.set.image(src);
+                    settings.onTopVisible = false;
                   });
-                };
-              }
-            },
+                });
+            }
+          },
             fixed: function () {
-              module.debug('Setting up fixed');
+              module.verbose('Setting up fixed on element pass');
               settings.once = false;
-              settings.observeChanges = false;
-              settings.initialCheck = true;
-              settings.refreshOnLoad = true;
-              if (!parameters.transition) {
-                settings.transition = false;
-              }
-              module.create.placeholder();
-              module.debug('Added placeholder', $placeholder);
               settings.onTopPassed = function () {
-                module.debug('Element passed, adding fixed position', $module);
-                module.show.placeholder();
-                module.set.fixed();
+              $module
+                .addClass(className.fixed)
+                .css({
+                  top: settings.offset + 'px'
+                })
+              ;
                 if (settings.transition) {
                   if ($.fn.transition !== undefined) {
                     $module.transition(settings.transition, settings.duration);
@@ -290,63 +292,32 @@
                 }
               };
               settings.onTopPassedReverse = function () {
-                module.debug('Element returned to position, removing fixed', $module);
-                module.hide.placeholder();
-                module.remove.fixed();
+              $module
+                .removeClass(className.fixed)
+                .css({
+                  position: '',
+                  top: ''
+                })
+              ;
               };
             }
           },
 
-          create: {
-            placeholder: function () {
-              module.verbose('Creating fixed position placeholder');
-              $placeholder = $module
-                .clone(false)
-                .css('display', 'none')
-                .addClass(className.placeholder)
-                .insertAfter($module)
-              ;
-            }
-          },
-
-          show: {
-            placeholder: function () {
-              module.verbose('Showing placeholder');
-              $placeholder
-                .css('display', 'block')
-                .css('visibility', 'hidden')
-              ;
-            }
-          },
-          hide: {
-            placeholder: function () {
-              module.verbose('Hiding placeholder');
-              $placeholder
-                .css('display', 'none')
-                .css('visibility', '')
-              ;
-            }
-          },
-
           set: {
-            fixed: function () {
-              module.verbose('Setting element to fixed position');
-              $module
-                .addClass(className.fixed)
-                .css({
-                  position: 'fixed',
-                  top: settings.offset + 'px',
-                  left: 'auto',
-                  zIndex: '1'
-                })
-              ;
-            },
             image: function (src) {
+              var
+                offScreen = (module.cache.screen.bottom < module.cache.element.top)
+                ;
               $module
                 .attr('src', src)
               ;
-              if (settings.transition) {
-                if ($.fn.transition !== undefined) {
+              if (offScreen) {
+                module.verbose('Image outside browser, no show animation');
+                $module.show();
+              }
+              else {
+                if (settings.transition) {
+                  if ($.fn.transition !== undefined) {
                   $module.transition(settings.transition, settings.duration);
                 }
                 else {
@@ -357,40 +328,23 @@
                 $module.show();
               }
             }
+            }
           },
 
           is: {
-            onScreen: function () {
-              var
-                calculations = module.get.elementCalculations()
-                ;
-              return calculations.onScreen;
-            },
-            offScreen: function () {
-              var
-                calculations = module.get.elementCalculations()
-                ;
-              return calculations.offScreen;
-            },
             visible: function () {
               if (module.cache && module.cache.element) {
-                return !(module.cache.element.width === 0 && module.cache.element.offset.top === 0);
-              }
+                return (module.cache.element.width > 0);
+            }
               return false;
             }
           },
 
           refresh: function () {
             module.debug('Refreshing constants (width/height)');
-            if (settings.type == 'fixed') {
-              module.remove.fixed();
-              module.remove.occurred();
-            }
             module.reset();
             module.save.position();
-            if (settings.checkOnRefresh) {
-              module.checkVisibility();
-            }
+            module.checkVisibility();
             settings.onRefresh.call(element);
           },
 
@@ -405,7 +359,7 @@
           checkVisibility: function (scroll) {
             module.verbose('Checking visibility of element', module.cache.element);
 
-            if (!disabled && module.is.visible()) {
+            if (module.is.visible()) {
 
               // save scroll position
               module.save.scroll(scroll);
@@ -424,8 +378,6 @@
               module.bottomPassedReverse();
 
               // one time
-              module.onScreen();
-              module.offScreen();
               module.passing();
               module.topVisible();
               module.bottomVisible();
@@ -435,7 +387,7 @@
               // on update callback
               if (settings.onUpdate) {
                 settings.onUpdate.call(element, module.get.elementCalculations());
-              }
+            }
             }
           },
 
@@ -445,7 +397,7 @@
               amountInPixels
               ;
             // assign callback
-            if (amount && newCallback) {
+            if (amount !== undefined && newCallback !== undefined) {
               settings.onPassed[amount] = newCallback;
             }
             else if (amount !== undefined) {
@@ -460,48 +412,6 @@
                   module.remove.occurred(callback);
                 }
               });
-            }
-          },
-
-          onScreen: function (newCallback) {
-            var
-              calculations = module.get.elementCalculations(),
-              callback = newCallback || settings.onOnScreen,
-              callbackName = 'onScreen'
-              ;
-            if (newCallback) {
-              module.debug('Adding callback for onScreen', newCallback);
-              settings.onOnScreen = newCallback;
-            }
-            if (calculations.onScreen) {
-              module.execute(callback, callbackName);
-            }
-            else if (!settings.once) {
-              module.remove.occurred(callbackName);
-            }
-            if (newCallback !== undefined) {
-              return calculations.onOnScreen;
-            }
-          },
-
-          offScreen: function (newCallback) {
-            var
-              calculations = module.get.elementCalculations(),
-              callback = newCallback || settings.onOffScreen,
-              callbackName = 'offScreen'
-              ;
-            if (newCallback) {
-              module.debug('Adding callback for offScreen', newCallback);
-              settings.onOffScreen = newCallback;
-            }
-            if (calculations.offScreen) {
-              module.execute(callback, callbackName);
-            }
-            else if (!settings.once) {
-              module.remove.occurred(callbackName);
-            }
-            if (newCallback !== undefined) {
-              return calculations.onOffScreen;
             }
           },
 
@@ -623,8 +533,8 @@
             }
             if (!calculations.passing) {
               if (module.get.occurred('passing')) {
-                module.execute(callback, callbackName);
-              }
+              module.execute(callback, callbackName);
+            }
             }
             else if (!settings.once) {
               module.remove.occurred(callbackName);
@@ -647,8 +557,8 @@
             }
             if (!calculations.topVisible) {
               if (module.get.occurred('topVisible')) {
-                module.execute(callback, callbackName);
-              }
+              module.execute(callback, callbackName);
+            }
             }
             else if (!settings.once) {
               module.remove.occurred(callbackName);
@@ -670,8 +580,8 @@
             }
             if (!calculations.bottomVisible) {
               if (module.get.occurred('bottomVisible')) {
-                module.execute(callback, callbackName);
-              }
+              module.execute(callback, callbackName);
+            }
             }
             else if (!settings.once) {
               module.remove.occurred(callbackName);
@@ -693,8 +603,8 @@
             }
             if (!calculations.topPassed) {
               if (module.get.occurred('topPassed')) {
-                module.execute(callback, callbackName);
-              }
+              module.execute(callback, callbackName);
+            }
             }
             else if (!settings.once) {
               module.remove.occurred(callbackName);
@@ -716,8 +626,8 @@
             }
             if (!calculations.bottomPassed) {
               if (module.get.occurred('bottomPassed')) {
-                module.execute(callback, callbackName);
-              }
+              module.execute(callback, callbackName);
+            }
             }
             else if (!settings.once) {
               module.remove.occurred(callbackName);
@@ -737,41 +647,26 @@
               if (settings.continuous) {
                 module.debug('Callback being called continuously', callbackName, calculations);
                 callback.call(element, calculations, screen);
-              }
+            }
               else if (!module.get.occurred(callbackName)) {
                 module.debug('Conditions met', callbackName, calculations);
                 callback.call(element, calculations, screen);
-              }
+            }
             }
             module.save.occurred(callbackName);
           },
 
           remove: {
-            fixed: function () {
-              module.debug('Removing fixed position');
-              $module
-                .removeClass(className.fixed)
-                .css({
-                  position: '',
-                  top: '',
-                  left: '',
-                  zIndex: ''
-                })
-              ;
-            },
             occurred: function (callback) {
               if (callback) {
-                var
-                  occurred = module.cache.occurred
-                  ;
-                if (occurred[callback] !== undefined && occurred[callback] === true) {
+                if (module.cache.occurred[callback] !== undefined && module.cache.occurred[callback] === true) {
                   module.debug('Callback can now be called again', callback);
                   module.cache.occurred[callback] = false;
-                }
               }
+            }
               else {
                 module.cache.occurred = {};
-              }
+            }
             }
           },
 
@@ -787,36 +682,36 @@
                 if (module.cache.occurred[callback] === undefined || (module.cache.occurred[callback] !== true)) {
                   module.verbose('Saving callback occurred', callback);
                   module.cache.occurred[callback] = true;
-                }
               }
-            },
+            }
+          },
             scroll: function (scrollPosition) {
               scrollPosition = scrollPosition + settings.offset || $context.scrollTop() + settings.offset;
               module.cache.scroll = scrollPosition;
             },
             direction: function () {
-              var
-                scroll = module.get.scroll(),
-                lastScroll = module.get.lastScroll(),
-                direction
-                ;
+            var
+              scroll = module.get.scroll(),
+              lastScroll = module.get.lastScroll(),
+              direction
+              ;
               if (scroll > lastScroll && lastScroll) {
                 direction = 'down';
-              }
+            }
               else if (scroll < lastScroll && lastScroll) {
                 direction = 'up';
-              }
+            }
               else {
                 direction = 'static';
-              }
+            }
               module.cache.direction = direction;
               return module.cache.direction;
-            },
+          },
             elementPosition: function () {
-              var
-                element = module.cache.element,
-                screen = module.get.screenSize()
-                ;
+            var
+              element = module.cache.element,
+              screen = module.get.screenSize()
+              ;
               module.verbose('Saving element position');
               // (quicker than $.extend)
               element.fits = (element.height < screen.height);
@@ -839,11 +734,11 @@
                 element.margin.bottom = parseInt($module.css('margin-bottom'), 10);
                 element.top = element.offset.top - element.margin.top;
                 element.bottom = element.offset.top + element.height + element.margin.bottom;
-              }
+            }
               else {
                 element.top = element.offset.top;
                 element.bottom = element.offset.top + element.height;
-              }
+            }
 
               // visibility
               element.topVisible = (screen.bottom >= element.top);
@@ -854,19 +749,19 @@
               element.percentagePassed = 0;
 
               // meta calculations
-              element.onScreen = (element.topVisible && !element.bottomPassed);
+              element.visible = (element.topVisible || element.bottomVisible);
               element.passing = (element.topPassed && !element.bottomPassed);
-              element.offScreen = (!element.onScreen);
+              element.hidden = (!element.topVisible && !element.bottomVisible);
 
               // passing calculations
               if (element.passing) {
                 element.pixelsPassed = (screen.top - element.top);
                 element.percentagePassed = (screen.top - element.top) / element.height;
-              }
+            }
               module.cache.element = element;
               module.verbose('Updated element calculations', element);
               return element;
-            },
+          },
             screenCalculations: function () {
               var
                 scroll = module.get.scroll()
@@ -890,12 +785,12 @@
 
           get: {
             pixelsPassed: function (amount) {
-              var
-                element = module.get.elementCalculations()
-                ;
+            var
+              element = module.get.elementCalculations()
+              ;
               if (amount.search('%') > -1) {
                 return ( element.height * (parseInt(amount, 10) / 100) );
-              }
+            }
               return parseInt(amount, 10);
             },
             occurred: function (callback) {
@@ -907,39 +802,39 @@
             direction: function () {
               if (module.cache.direction === undefined) {
                 module.save.direction();
-              }
+            }
               return module.cache.direction;
-            },
+          },
             elementPosition: function () {
               if (module.cache.element === undefined) {
                 module.save.elementPosition();
-              }
+            }
               return module.cache.element;
-            },
+          },
             elementCalculations: function () {
               if (module.cache.element === undefined) {
                 module.save.elementCalculations();
-              }
+            }
               return module.cache.element;
-            },
+          },
             screenCalculations: function () {
               if (module.cache.screen === undefined) {
-                module.save.screenCalculations();
+              module.save.screenCalculations();
               }
               return module.cache.screen;
             },
             screenSize: function () {
               if (module.cache.screen === undefined) {
-                module.save.screenSize();
-              }
+              module.save.screenSize();
+            }
               return module.cache.screen;
-            },
+          },
             scroll: function () {
               if (module.cache.scroll === undefined) {
                 module.save.scroll();
-              }
+            }
               return module.cache.scroll;
-            },
+          },
             lastScroll: function () {
               if (module.cache.screen === undefined) {
                 module.debug('First scroll event, no last scroll could be found');
@@ -975,22 +870,22 @@
             if (settings.debug) {
               if (settings.performance) {
                 module.performance.log(arguments);
-              }
-              else {
+            }
+            else {
                 module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
                 module.debug.apply(console, arguments);
-              }
+            }
             }
           },
           verbose: function () {
             if (settings.verbose && settings.debug) {
               if (settings.performance) {
                 module.performance.log(arguments);
-              }
-              else {
+            }
+            else {
                 module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
                 module.verbose.apply(console, arguments);
-              }
+            }
             }
           },
           error: function () {
@@ -1018,7 +913,7 @@
               }
               clearTimeout(module.performance.timer);
               module.performance.timer = setTimeout(module.performance.display, 500);
-            },
+          },
             display: function () {
               var
                 title = settings.name + ':',
@@ -1037,14 +932,14 @@
                 console.groupCollapsed(title);
                 if (console.table) {
                   console.table(performance);
-                }
-                else {
+              }
+              else {
                   $.each(performance, function (index, data) {
                     console.log(data['Name'] + ': ' + data['Execution Time'] + 'ms');
                   });
-                }
-                console.groupEnd();
               }
+                console.groupEnd();
+            }
               performance = [];
             }
           },
@@ -1067,30 +962,30 @@
                   ;
                 if ($.isPlainObject(object[camelCaseValue]) && (depth != maxDepth)) {
                   object = object[camelCaseValue];
-                }
+              }
                 else if (object[camelCaseValue] !== undefined) {
                   found = object[camelCaseValue];
                   return false;
-                }
+              }
                 else if ($.isPlainObject(object[value]) && (depth != maxDepth)) {
                   object = object[value];
-                }
+              }
                 else if (object[value] !== undefined) {
                   found = object[value];
                   return false;
-                }
+              }
                 else {
                   module.error(error.method, query);
                   return false;
-                }
+              }
               });
-            }
+          }
             if ($.isFunction(found)) {
               response = found.apply(context, passedArguments);
-            }
+          }
             else if (found !== undefined) {
               response = found;
-            }
+          }
             if ($.isArray(returnedValue)) {
               returnedValue.push(response);
             }
@@ -1106,10 +1001,8 @@
 
         if (methodInvoked) {
           if (instance === undefined) {
-            module.initialize();
-          }
-          instance.save.scroll();
-          instance.save.calculations();
+          module.initialize();
+        }
           module.invoke(query);
         }
         else {
@@ -1139,17 +1032,8 @@
     // whether to use mutation observers to follow changes
     observeChanges: true,
 
-    // check position immediately on init
-    initialCheck: true,
-
     // whether to refresh calculations after all page images load
     refreshOnLoad: true,
-
-    // whether to refresh calculations after page resize event
-    refreshOnResize: true,
-
-    // should call callbacks on refresh event (resize, etc)
-    checkOnRefresh: true,
 
     // callback should only occur one time
     once: true,
@@ -1166,6 +1050,9 @@
     // scroll context for visibility checks
     context: window,
 
+    // check position immediately on init
+    initialCheck: true,
+
     // visibility check delay in ms (defaults to animationFrame)
     throttle: false,
 
@@ -1173,15 +1060,13 @@
     type: false,
 
     // image only animation settings
-    transition: 'fade in',
+    transition: false,
     duration: 1000,
 
     // array of callbacks for percentage
     onPassed: {},
 
     // standard callbacks
-    onOnScreen: false,
-    onOffScreen: false,
     onPassing: false,
     onTopVisible: false,
     onBottomVisible: false,
@@ -1200,13 +1085,8 @@
     onRefresh: function () {
     },
 
-    metadata: {
-      src: 'src'
-    },
-
     className: {
-      fixed: 'fixed',
-      placeholder: 'placeholder'
+      fixed: 'fixed'
     },
 
     error: {

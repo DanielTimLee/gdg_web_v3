@@ -3,18 +3,19 @@
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
 
+
 /*******************************
             Theme
 *******************************/
 
-@type: 'module';
-@element: 'search';
+@type    : 'module';
+@element : 'search';
 
 @import (multiple) '../../theme.config';
 
@@ -30,7 +31,7 @@
   margin: 0em;
   outline: none;
   -webkit-appearance: none;
-  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 
   text-shadow: none;
   font-style: normal;
@@ -51,6 +52,7 @@
   border-radius: @promptBorderRadius;
 }
 
+
 /*--------------
      Icon
 ---------------*/
@@ -69,7 +71,6 @@
   position: absolute;
   top: 100%;
   left: 0%;
-  transform-origin: center top;
 
   background: @resultsBackground;
 
@@ -78,16 +79,7 @@
 
   border-radius: @resultsBorderRadius;
   box-shadow: @resultsBoxShadow;
-  border: @resultsBorder;
   z-index: @resultsZIndex;
-}
-
-.ui.search > .results > :first-child {
-  border-radius: @resultsBorderRadius @resultsBorderRadius 0em 0em;
-}
-
-.ui.search > .results > :last-child {
-  border-radius: 0em 0em @resultsBorderRadius @resultsBorderRadius;
 }
 
 /*--------------
@@ -99,14 +91,13 @@
   display: block;
   overflow: hidden;
   font-size: @resultFontSize;
-  padding: @resultPadding;
+  padding: @resultVerticalPadding @resultHorizontalPadding;
   color: @resultTextColor;
   line-height: @resultLineHeight;
   border-bottom: @resultDivider;
 }
-
 .ui.search > .results .result:last-child {
-  border-bottom: @resultLastDivider !important;
+  border-bottom: @resultLastDivider;
 }
 
 /* Image */
@@ -118,7 +109,6 @@
   height: @resultImageHeight;
   border-radius: @resultImageBorderRadius;
 }
-
 .ui.search > .results .result .image img {
   display: block;
   width: auto;
@@ -134,19 +124,16 @@
 }
 
 .ui.search > .results .result .title {
-  margin: @resultTitleMargin;
   font-family: @resultTitleFont;
   font-weight: @resultTitleFontWeight;
   font-size: @resultTitleFontSize;
   color: @resultTitleColor;
 }
-
 .ui.search > .results .result .description {
   margin-top: @resultDescriptionDistance;
   font-size: @resultDescriptionFontSize;
   color: @resultDescriptionColor;
 }
-
 .ui.search > .results .result .price {
   float: @resultPriceFloat;
   color: @resultPriceColor;
@@ -159,14 +146,12 @@
 .ui.search > .results > .message {
   padding: @messageVerticalPadding @messageHorizontalPadding;
 }
-
 .ui.search > .results > .message .header {
   font-family: @headerFont;
   font-size: @messageHeaderFontSize;
   font-weight: @messageHeaderFontWeight;
   color: @messageHeaderColor;
 }
-
 .ui.search > .results > .message .description {
   margin-top: @messageDescriptionDistance;
   font-size: @messageDescriptionFontSize;
@@ -184,25 +169,16 @@
   text-align: @actionAlign;
 }
 
+
 /*******************************
             States
 *******************************/
 
 /*--------------------
-       Focus
----------------------*/
-
-.ui.search > .prompt:focus {
-  border-color: @promptFocusBorderColor;
-  background: @promptFocusBackground;
-  color: @promptFocusColor;
-}
-
-/*--------------------
        Loading
 ---------------------*/
 
-.ui.loading.search .input > i.icon:before {
+.ui.loading.search .input > .icon:before {
   position: absolute;
   content: '';
   top: 50%;
@@ -215,8 +191,7 @@
   border-radius: @circularRadius;
   border: @loaderLineWidth solid @loaderFillColor;
 }
-
-.ui.loading.search .input > i.icon:after {
+.ui.loading.search .input > .icon:after {
   position: absolute;
   content: '';
   top: 50%;
@@ -238,6 +213,7 @@
   box-shadow: 0px 0px 0px 1px transparent;
 }
 
+
 /*--------------
       Hover
 ---------------*/
@@ -246,7 +222,6 @@
 .ui.category.search > .results .category .result:hover {
   background: @resultHoverBackground;
 }
-
 .ui.search .action:hover {
   background: @actionHoverBackground;
 }
@@ -255,11 +230,10 @@
       Active
 ---------------*/
 
-.ui.category.search > .results .category.active {
+.ui.search > .results .category.active {
   background: @categoryActiveBackground;
 }
-
-.ui.category.search > .results .category.active > .name {
+.ui.search > .results .category.active > .name {
   color: @categoryNameActiveColor;
 }
 
@@ -270,11 +244,9 @@
   background: @resultActiveBackground;
   box-shadow: @resultActiveBoxShadow;
 }
-
 .ui.search > .results .result.active .title {
   color: @resultActiveTitleColor;
 }
-
 .ui.search > .results .result.active .description {
   color: @resultActiveDescriptionColor;
 }
@@ -284,42 +256,7 @@
 *******************************/
 
 /*--------------
-    Selection
----------------*/
-
-.ui.search.selection .prompt {
-  border-radius: @selectionPromptBorderRadius;
-}
-
-/* Remove input */
-.ui.search.selection > .icon.input > .remove.icon {
-  pointer-events: none;
-  position: absolute;
-  left: auto;
-  opacity: 0;
-  color: @selectionCloseIconColor;
-  top: @selectionCloseTop;
-  right: @selectionCloseRight;
-  transition: @selectionCloseTransition;
-}
-
-.ui.search.selection > .icon.input > .active.remove.icon {
-  cursor: pointer;
-  opacity: @selectionCloseIconOpacity;
-  pointer-events: auto;
-}
-
-.ui.search.selection > .icon.input:not([class*="left icon"]) > .icon ~ .remove.icon {
-  right: @selectionCloseIconInputRight;
-}
-
-.ui.search.selection > .icon.input > .remove.icon:hover {
-  opacity: @selectionCloseIconHoverOpacity;
-  color: @selectionCloseIconHoverColor;
-}
-
-/*--------------
-    Category
+    Categories
 ---------------*/
 
 .ui.category.search .results {
@@ -333,19 +270,8 @@
   border-bottom: @categoryDivider;
   transition: @categoryTransition;
 }
-
-/* Last Category */
 .ui.category.search > .results .category:last-child {
   border-bottom: none;
-}
-
-/* First / Last */
-.ui.category.search > .results .category:first-child .name + .result {
-  border-radius: 0em @resultsBorderRadius 0em 0em;
-}
-
-.ui.category.search > .results .category:last-child .result:last-child {
-  border-radius: 0em 0em @resultsBorderRadius 0em;
 }
 
 /* Category Result */
@@ -355,10 +281,8 @@
   border-left: @categoryResultLeftBorder;
   border-bottom: @categoryResultDivider;
   transition: @categoryResultTransition;
-  padding: @categoryResultPadding;
 }
-
-.ui.category.search > .results .category:last-child .result:last-child {
+.ui.category.search > .results .category .result:last-child {
   border-bottom: @categoryResultLastDivider;
 }
 
@@ -387,7 +311,6 @@
   right: auto;
   left: 0%;
 }
-
 .ui[class*="right aligned"].search > .results {
   right: 0%;
   left: auto;
@@ -401,36 +324,16 @@
   width: 100%;
 }
 
+
 /*--------------
       Sizes
 ---------------*/
 
-.ui.mini.search {
-  font-size: @relativeMini;
-}
-
-.ui.small.search {
-  font-size: @relativeSmall;
-}
-
 .ui.search {
-  font-size: @relativeMedium;
+  font-size: @medium;
 }
-
 .ui.large.search {
-  font-size: @relativeLarge;
-}
-
-.ui.big.search {
-  font-size: @relativeBig;
-}
-
-.ui.huge.search {
-  font-size: @relativeHuge;
-}
-
-.ui.massive.search {
-  font-size: @relativeMassive;
+  font-size: @large;
 }
 
 .loadUIOverrides();

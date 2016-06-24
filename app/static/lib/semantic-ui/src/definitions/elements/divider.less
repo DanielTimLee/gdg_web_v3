@@ -3,7 +3,7 @@
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
@@ -13,10 +13,11 @@
             Theme
 *******************************/
 
-@type: 'element';
-@element: 'divider';
+@type    : 'element';
+@element : 'divider';
 
 @import (multiple) '../../theme.config';
+
 
 /*******************************
             Divider
@@ -50,19 +51,17 @@
     Coupling
 ---------------*/
 
-/* Allow divider between each column row */
-.ui.grid > .column + .divider,
-.ui.grid > .row > .column + .divider {
-  left: auto;
+.ui.grid > .ui.divider {
+  font-size: 1rem;
 }
+
 
 /*--------------
    Horizontal
 ---------------*/
 
 .ui.horizontal.divider {
-  display: table;
-  white-space: nowrap;
+  position: relative;
 
   height: auto;
   margin: @horizontalMargin;
@@ -73,20 +72,24 @@
 
 .ui.horizontal.divider:before,
 .ui.horizontal.divider:after {
-  content: '';
-  display: table-cell;
-  position: relative;
+  position: absolute;
   top: 50%;
+  content: '';
+  z-index: 3;
+
   width: 50%;
-  background-repeat: no-repeat;
+  top: 50%;
+  height: 0px;
+
+  border-top: @shadowWidth solid @shadowColor;
+  border-bottom: @highlightWidth solid @highlightColor;
 }
 
 .ui.horizontal.divider:before {
-  background-position: right @horizontalDividerMargin top 50%;
+  margin-left: @horizontalRulerOffset;
 }
-
 .ui.horizontal.divider:after {
-  background-position: left @horizontalDividerMargin top 50%;
+  margin-left: @horizontalDividerMargin;
 }
 
 /*--------------
@@ -126,54 +129,49 @@
 .ui.vertical.divider:before {
   top: -100%;
 }
-
 .ui.vertical.divider:after {
   top: auto;
   bottom: 0px;
 }
 
 /* Inside grid */
-@media only screen and (max-width: @largestMobileScreen) {
-
+@media only screen and (max-width : (@tabletBreakpoint - 1px)) {
   .ui.stackable.grid .ui.vertical.divider,
   .ui.grid .stackable.row .ui.vertical.divider {
-    display: table;
-    white-space: nowrap;
+    position: relative;
+    margin: @margin;
+    left: 50%;
     height: auto;
-    margin: @horizontalMargin;
     overflow: hidden;
     line-height: 1;
     text-align: center;
-    position: static;
-    top: 0;
-    left: 0;
-    transform: none;
   }
 
   .ui.stackable.grid .ui.vertical.divider:before,
   .ui.grid .stackable.row .ui.vertical.divider:before,
   .ui.stackable.grid .ui.vertical.divider:after,
   .ui.grid .stackable.row .ui.vertical.divider:after {
-    position: static;
-    left: 0;
-    border-left: none;
-    border-right: none;
-    content: '';
-    display: table-cell;
-    position: relative;
+    position: absolute;
     top: 50%;
+    left: auto;
+    content: '';
+    z-index: 3;
+
     width: 50%;
-    background-repeat: no-repeat;
+    top: 50%;
+    height: 0px;
+
+    border-top: @shadowWidth solid @shadowColor;
+    border-bottom: @highlightWidth solid @highlightColor;
   }
 
   .ui.stackable.grid .ui.vertical.divider:before,
   .ui.grid .stackable.row .ui.vertical.divider:before {
-    background-position: right @horizontalDividerMargin top 50%;
+    margin-left: -(50% + @horizontalDividerMargin);
   }
-
   .ui.stackable.grid .ui.vertical.divider:after,
   .ui.grid .stackable.row .ui.vertical.divider:after {
-    background-position: left @horizontalDividerMargin top 50%;
+    margin-left: @horizontalDividerMargin;
   }
 }
 
@@ -200,11 +198,6 @@
   border-color: transparent !important;
 }
 
-.ui.hidden.divider:before,
-.ui.hidden.divider:after {
-  display: none;
-}
-
 /*--------------
     Inverted
 ---------------*/
@@ -214,13 +207,13 @@
 .ui.horizontal.inverted.divider {
   color: @invertedTextColor;
 }
-
 .ui.divider.inverted,
 .ui.divider.inverted:after,
 .ui.divider.inverted:before {
   border-top-color: @invertedShadowColor !important;
-  border-left-color: @invertedShadowColor !important;
   border-bottom-color: @invertedHighlightColor !important;
+
+  border-left-color: @invertedShadowColor !important;
   border-right-color: @invertedHighlightColor !important;
 }
 
@@ -256,5 +249,6 @@
 .ui.divider {
   font-size: @medium;
 }
+
 
 .loadUIOverrides();

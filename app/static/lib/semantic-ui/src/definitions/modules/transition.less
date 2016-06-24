@@ -3,18 +3,19 @@
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributorss
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
 
+
 /*******************************
             Theme
 *******************************/
 
-@type: 'module';
-@element: 'transition';
+@type    : 'module';
+@element : 'transition';
 
 @import (multiple) '../../theme.config';
 
@@ -33,9 +34,11 @@
             States
 *******************************/
 
+
 /* Animating */
 .animating.transition {
   backface-visibility: @backfaceVisibility;
+  transform: @use3DAcceleration;
   visibility: visible !important;
 }
 
@@ -56,8 +59,8 @@
 .visible.transition {
   display: block !important;
   visibility: visible !important;
-  /*  backface-visibility: @backfaceVisibility;
-    transform: @use3DAcceleration;*/
+  backface-visibility: @backfaceVisibility;
+  transform: @use3DAcceleration;
 }
 
 /* Disabled */
@@ -72,5 +75,6 @@
 .looping.transition {
   animation-iteration-count: infinite;
 }
+
 
 .loadUIOverrides();

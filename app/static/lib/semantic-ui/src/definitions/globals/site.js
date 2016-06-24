@@ -3,7 +3,7 @@
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
@@ -62,7 +62,7 @@
           if (console === undefined || console.log === undefined) {
             module.verbose('Console not available, normalizing events');
             module.disable.console();
-          }
+        }
           if (typeof console.group == 'undefined' || typeof console.groupEnd == 'undefined' || typeof console.groupCollapsed == 'undefined') {
             module.verbose('Console group not available, normalizing events');
             window.console.group = function () {
@@ -77,16 +77,16 @@
             window.console.markTimeline = function () {
             };
           }
-        },
+      },
         consoleClear: function () {
           module.debug('Disabling programmatic console clearing');
           window.console.clear = function () {
           };
-        },
+      },
         requestAnimationFrame: function () {
           module.debug('Normalizing requestAnimationFrame');
           if (window.requestAnimationFrame === undefined) {
-            module.debug('RequestAnimationFrame not available, normalizing event');
+            module.debug('RequestAnimationFrame not available, normailizing event');
             window.requestAnimationFrame = window.requestAnimationFrame
               || window.mozRequestAnimationFrame
               || window.webkitRequestAnimationFrame
@@ -95,7 +95,7 @@
                 setTimeout(callback, 0);
               }
             ;
-          }
+        }
         }
       },
 
@@ -151,7 +151,7 @@
                 ? $.fn[name].settings.namespace || false
                 : true,
               $existingModules
-              ;
+          ;
             if (module.moduleExists(name)) {
               module.verbose('Changing default setting', setting, value, name);
               $.fn[name].settings[setting] = value;
@@ -160,8 +160,8 @@
                 if ($existingModules.length > 0) {
                   module.verbose('Modifying existing settings', $existingModules);
                   $existingModules[name]('setting', setting, value);
-                }
               }
+            }
             }
           });
         },
@@ -177,7 +177,7 @@
           $.each(modules, function (index, name) {
             var
               $existingModules
-              ;
+          ;
             if (module.moduleExists(name)) {
               module.verbose('Changing default setting', newSettings, name);
               $.extend(true, $.fn[name].settings, newSettings);
@@ -186,8 +186,8 @@
                 if ($existingModules.length > 0) {
                   module.verbose('Modifying existing settings', $existingModules);
                   $existingModules[name]('setting', newSettings);
-                }
               }
+            }
             }
           });
         }
@@ -196,12 +196,12 @@
       enable: {
         console: function () {
           module.console(true);
-        },
+      },
         debug: function (modules, modifyExisting) {
           modules = modules || settings.modules;
           module.debug('Enabling debug for modules', modules);
           module.change.setting('debug', true, modules, modifyExisting);
-        },
+      },
         verbose: function (modules, modifyExisting) {
           modules = modules || settings.modules;
           module.debug('Enabling verbose debug for modules', modules);
@@ -229,7 +229,7 @@
           if (instance.cache.console === undefined) {
             module.error(error.console);
             return;
-          }
+        }
           module.debug('Restoring console function');
           window.console = instance.cache.console;
         }
@@ -294,22 +294,22 @@
         if (settings.debug) {
           if (settings.performance) {
             module.performance.log(arguments);
-          }
-          else {
+        }
+        else {
             module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
             module.debug.apply(console, arguments);
-          }
+        }
         }
       },
       verbose: function () {
         if (settings.verbose && settings.debug) {
           if (settings.performance) {
             module.performance.log(arguments);
-          }
-          else {
+        }
+        else {
             module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
             module.verbose.apply(console, arguments);
-          }
+        }
         }
       },
       error: function () {
@@ -336,8 +336,8 @@
             });
           }
           clearTimeout(module.performance.timer);
-          module.performance.timer = setTimeout(module.performance.display, 500);
-        },
+          module.performance.timer = setTimeout(module.performance.display, 100);
+      },
         display: function () {
           var
             title = settings.name + ':',
@@ -353,14 +353,14 @@
             console.groupCollapsed(title);
             if (console.table) {
               console.table(performance);
-            }
-            else {
+          }
+          else {
               $.each(performance, function (index, data) {
                 console.log(data['Name'] + ': ' + data['Execution Time'] + 'ms');
               });
-            }
-            console.groupEnd();
           }
+            console.groupEnd();
+        }
           performance = [];
         }
       },
@@ -383,30 +383,30 @@
               ;
             if ($.isPlainObject(object[camelCaseValue]) && (depth != maxDepth)) {
               object = object[camelCaseValue];
-            }
+          }
             else if (object[camelCaseValue] !== undefined) {
               found = object[camelCaseValue];
               return false;
-            }
+          }
             else if ($.isPlainObject(object[value]) && (depth != maxDepth)) {
               object = object[value];
-            }
+          }
             else if (object[value] !== undefined) {
               found = object[value];
               return false;
-            }
+          }
             else {
               module.error(error.method, query);
               return false;
             }
           });
-        }
+      }
         if ($.isFunction(found)) {
           response = found.apply(context, passedArguments);
-        }
+      }
         else if (found !== undefined) {
           response = found;
-        }
+      }
         if ($.isArray(returnedValue)) {
           returnedValue.push(response);
         }
@@ -417,8 +417,8 @@
           returnedValue = response;
         }
         return found;
-      }
-    };
+    }
+  };
 
     if (methodInvoked) {
       if (instance === undefined) {
@@ -449,7 +449,7 @@
     },
 
     debug: false,
-    verbose: false,
+    verbose: true,
     performance: true,
 
     modules: [
@@ -458,7 +458,6 @@
       'checkbox',
       'dimmer',
       'dropdown',
-      'embed',
       'form',
       'modal',
       'nag',
@@ -470,6 +469,7 @@
       'sticky',
       'tab',
       'transition',
+      'video',
       'visit',
       'visibility'
     ],

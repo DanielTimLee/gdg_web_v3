@@ -18,6 +18,7 @@
     "tests"
   ],
   "dependencies": {
-    "semantic-ui": "^1.12.3"
+    "semantic-ui": "^1.12.3",
+    "velocity": "^1.2.3"
   }
 }

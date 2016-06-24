@@ -3,20 +3,22 @@
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
 
+
 /*******************************
             Theme
 *******************************/
 
-@type: 'module';
-@element: 'popup';
+@type    : 'module';
+@element : 'popup';
 
 @import (multiple) '../../theme.config';
+
 
 /*******************************
             Popup
@@ -28,14 +30,11 @@
   top: 0px;
   right: 0px;
 
-  /* Fixes content being squished when inline (moz only) */
-  min-width: min-content;
   z-index: @zIndex;
 
   border: @border;
-  line-height: @lineHeight;
   max-width: @maxWidth;
-  background: @background;
+  background-color: @background;
 
   padding: @verticalPadding @horizontalPadding;
   font-weight: @fontWeight;
@@ -45,7 +44,6 @@
   border-radius: @borderRadius;
   box-shadow: @boxShadow;
 }
-
 .ui.popup > .header {
   padding: 0em;
 
@@ -54,7 +52,6 @@
   line-height: @headerLineHeight;
   font-weight: bold;
 }
-
 .ui.popup > .header + .content {
   padding-top: @headerDistance;
 }
@@ -83,50 +80,17 @@
 .ui.popup {
   margin: 0em;
 }
-
-/* Extending from Top */
-.ui.top.popup {
-  margin: 0em 0em @popupDistanceAway;
-}
-
-.ui.top.left.popup {
-  transform-origin: left bottom;
-}
-
-.ui.top.center.popup {
-  transform-origin: center bottom;
-}
-
-.ui.top.right.popup {
-  transform-origin: right bottom;
-}
-
-/* Extending from Vertical Center */
-.ui.left.center.popup {
-  margin: 0em @popupDistanceAway 0em 0em;
-  transform-origin: right 50%;
-}
-
-.ui.right.center.popup {
-  margin: 0em 0em 0em @popupDistanceAway;
-  transform-origin: left 50%;
-}
-
-/* Extending from Bottom */
-.ui.bottom.popup {
+.ui.popup.bottom {
   margin: @popupDistanceAway 0em 0em;
 }
-
-.ui.bottom.left.popup {
-  transform-origin: left top;
+.ui.popup.top {
+  margin: 0em 0em @popupDistanceAway;
 }
-
-.ui.bottom.center.popup {
-  transform-origin: center top;
+.ui.popup.left.center {
+  margin: 0em @popupDistanceAway 0em 0em;
 }
-
-.ui.bottom.right.popup {
-  transform-origin: right top;
+.ui.popup.right.center {
+  margin: 0em 0em 0em @popupDistanceAway;
 }
 
 /*--------------
@@ -146,8 +110,6 @@
 .ui.bottom.left.popup {
   margin-left: @boxArrowOffset;
 }
-
-/*rtl:rename*/
 .ui.bottom.left.popup:before {
   top: @arrowOffset;
   left: @arrowDistanceFromEdge;
@@ -160,8 +122,6 @@
 .ui.bottom.right.popup {
   margin-right: @boxArrowOffset;
 }
-
-/*rtl:rename*/
 .ui.bottom.right.popup:before {
   top: @arrowOffset;
   right: @arrowDistanceFromEdge;
@@ -179,12 +139,9 @@
   left: 50%;
   margin-left: @arrowOffset;
 }
-
 .ui.top.left.popup {
   margin-left: @boxArrowOffset;
 }
-
-/*rtl:rename*/
 .ui.top.left.popup:before {
   bottom: @arrowOffset;
   left: @arrowDistanceFromEdge;
@@ -192,12 +149,9 @@
   right: auto;
   margin-left: 0em;
 }
-
 .ui.top.right.popup {
   margin-right: @boxArrowOffset;
 }
-
-/*rtl:rename*/
 .ui.top.right.popup:before {
   bottom: @arrowOffset;
   right: @arrowDistanceFromEdge;
@@ -207,7 +161,6 @@
 }
 
 /*--- Left Center ---*/
-/*rtl:rename*/
 .ui.left.center.popup:before {
   top: 50%;
   right: @arrowOffset;
@@ -218,7 +171,6 @@
 }
 
 /*--- Right Center  ---*/
-/*rtl:rename*/
 .ui.right.center.popup:before {
   top: 50%;
   left: @arrowOffset;
@@ -226,34 +178,6 @@
   right: auto;
   margin-top: @arrowOffset;
   box-shadow: @rightArrowBoxShadow;
-}
-
-/* Arrow Color By Location */
-.ui.bottom.popup:before {
-  background: @arrowTopBackground;
-}
-
-.ui.right.center.popup:before,
-.ui.left.center.popup:before {
-  background: @arrowCenterBackground;
-}
-
-.ui.top.popup:before {
-  background: @arrowBottomBackground;
-}
-
-/* Inverted Arrow Color */
-.ui.inverted.bottom.popup:before {
-  background: @invertedArrowTopBackground;
-}
-
-.ui.inverted.right.center.popup:before,
-.ui.inverted.left.center.popup:before {
-  background: @invertedArrowCenterBackground;
-}
-
-.ui.inverted.top.popup:before {
-  background: @invertedArrowBottomBackground;
 }
 
 /*******************************
@@ -281,10 +205,6 @@
   display: block;
 }
 
-.ui.visible.popup {
-  transform: translateZ(0px);
-  backface-visibility: hidden;
-}
 
 /*******************************
             Variations
@@ -298,6 +218,7 @@
   display: none;
 }
 
+
 /*--------------
      Wide
 ---------------*/
@@ -305,17 +226,10 @@
 .ui.wide.popup {
   max-width: @wideWidth;
 }
-
 .ui[class*="very wide"].popup {
   max-width: @veryWideWidth;
 }
 
-@media only screen and (max-width: @largestMobileScreen) {
-  .ui.wide.popup,
-  .ui[class*="very wide"].popup {
-    max-width: @maxWidth;
-  }
-}
 
 /*--------------
      Fluid
@@ -325,6 +239,7 @@
   width: 100%;
   max-width: none;
 }
+
 
 /*--------------
      Colors
@@ -337,12 +252,10 @@
   border: @invertedBorder;
   box-shadow: @invertedBoxShadow;
 }
-
 .ui.inverted.popup .header {
   background-color: @invertedHeaderBackground;
   color: @invertedHeaderColor;
 }
-
 .ui.inverted.popup:before {
   background-color: @invertedArrowColor;
   box-shadow: none !important;
@@ -356,32 +269,23 @@
   max-width: none;
 }
 
+
 /*--------------
      Sizes
 ---------------*/
 
-.ui.mini.popup {
-  font-size: @mini;
-}
-
-.ui.tiny.popup {
-  font-size: @tiny;
-}
-
 .ui.small.popup {
   font-size: @small;
 }
-
 .ui.popup {
   font-size: @medium;
 }
-
 .ui.large.popup {
   font-size: @large;
 }
-
 .ui.huge.popup {
   font-size: @huge;
 }
+
 
 .loadUIOverrides();

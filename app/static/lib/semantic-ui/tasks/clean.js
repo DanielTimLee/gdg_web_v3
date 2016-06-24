@@ -1,14 +1,14 @@
 /*******************************
- Clean Task
- *******************************/
+          Clean Task
+*******************************/
 
 var
-  del = require('del'),
+  del    = require('del'),
   config = require('./config/user'),
-  tasks = require('./config/tasks')
-  ;
+  tasks  = require('./config/project/tasks')
+;
 
 // cleans distribution files
-module.exports = function (callback) {
+module.exports = function(callback) {
   return del([config.paths.clean], tasks.settings.del, callback);
 };

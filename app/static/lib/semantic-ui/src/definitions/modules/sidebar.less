@@ -3,18 +3,20 @@
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributorss
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
 
+
+
 /*******************************
             Theme
 *******************************/
 
-@type: 'module';
-@element: 'sidebar';
+@type    : 'module';
+@element : 'sidebar';
 
 @import (multiple) '../../theme.config';
 
@@ -36,7 +38,6 @@
   -webkit-overflow-scrolling: touch;
 
   height: 100% !important;
-  max-height: 100%;
   border-radius: 0em !important;
   margin: 0em !important;
   overflow-y: auto !important;
@@ -46,7 +47,9 @@
 /* GPU Layers for Child Elements */
 .ui.sidebar > * {
   backface-visibility: hidden;
+  transform: rotateZ(0deg);
 }
+
 
 /*--------------
    Direction
@@ -57,7 +60,6 @@
   left: 0px;
   transform: translate3d(-100%, 0, 0);
 }
-
 .ui.right.sidebar {
   right: 0px !important;
   left: auto !important;
@@ -68,19 +70,19 @@
 .ui.bottom.sidebar {
   width: 100% !important;
   height: auto !important;
+  overflow-y: visible !important;
 }
-
 .ui.top.sidebar {
   top: 0px !important;
   bottom: auto !important;
   transform: translate3d(0, -100%, 0);
 }
-
 .ui.bottom.sidebar {
   top: auto !important;
   bottom: 0px !important;
   transform: translate3d(0, 100%, 0);
 }
+
 
 /*--------------
      Pushable
@@ -101,12 +103,12 @@ body.pushable {
 .pushable:not(body) {
   transform: translate3d(0, 0, 0);
 }
-
 .pushable:not(body) > .ui.sidebar,
 .pushable:not(body) > .fixed,
 .pushable:not(body) > .pusher:after {
   position: absolute;
 }
+
 
 /*--------------
      Fixed
@@ -138,7 +140,6 @@ body.pushable > .pusher {
   background: @pageBackground;
 }
 
-/* Pusher should inherit background from context */
 .pushable > .pusher {
   background: inherit;
 }
@@ -153,6 +154,8 @@ body.pushable > .pusher {
   right: 0px;
   content: '';
   background-color: @dimmerColor;
+  width: 0px;
+  height: 0px;
   overflow: hidden;
   opacity: 0;
   transition: @dimmerTransition;
@@ -204,7 +207,6 @@ body.pushable > .pusher {
 .ui.right.visible.sidebar {
   box-shadow: @horizontalBoxShadow;
 }
-
 .ui.top.visible.sidebar,
 .ui.bottom.visible.sidebar {
   box-shadow: @verticalBoxShadow;
@@ -215,17 +217,14 @@ body.pushable > .pusher {
 .ui.visible.left.sidebar ~ .pusher {
   transform: translate3d(@width, 0, 0);
 }
-
 .ui.visible.right.sidebar ~ .fixed,
 .ui.visible.right.sidebar ~ .pusher {
   transform: translate3d(-@width, 0, 0);
 }
-
 .ui.visible.top.sidebar ~ .fixed,
 .ui.visible.top.sidebar ~ .pusher {
   transform: translate3d(0, @height, 0);
 }
-
 .ui.visible.bottom.sidebar ~ .fixed,
 .ui.visible.bottom.sidebar ~ .pusher {
   transform: translate3d(0, -@height, 0);
@@ -252,10 +251,6 @@ html.ios {
   -webkit-overflow-scrolling: touch;
 }
 
-html.ios,
-html.ios body {
-  height: initial !important;
-}
 
 /*******************************
           Variations
@@ -266,72 +261,64 @@ html.ios body {
 ---------------*/
 
 /* Left / Right */
-.ui.thin.left.sidebar,
-.ui.thin.right.sidebar {
-  width: @thinWidth;
-}
-
 .ui[class*="very thin"].left.sidebar,
 .ui[class*="very thin"].right.sidebar {
   width: @veryThinWidth;
 }
-
+.ui.thin.left.sidebar,
+.ui.thin.right.sidebar {
+  width: @thinWidth;
+}
 .ui.left.sidebar,
 .ui.right.sidebar {
   width: @width;
 }
-
 .ui.wide.left.sidebar,
 .ui.wide.right.sidebar {
   width: @wideWidth;
 }
-
 .ui[class*="very wide"].left.sidebar,
 .ui[class*="very wide"].right.sidebar {
   width: @veryWideWidth;
 }
 
 /* Left Visible */
-.ui.visible.thin.left.sidebar ~ .fixed,
-.ui.visible.thin.left.sidebar ~ .pusher {
-  transform: translate3d(@thinWidth, 0, 0);
-}
-
 .ui.visible[class*="very thin"].left.sidebar ~ .fixed,
 .ui.visible[class*="very thin"].left.sidebar ~ .pusher {
   transform: translate3d(@veryThinWidth, 0, 0);
 }
-
+.ui.visible.thin.left.sidebar ~ .fixed,
+.ui.visible.thin.left.sidebar ~ .pusher {
+  transform: translate3d(@thinWidth, 0, 0);
+}
 .ui.visible.wide.left.sidebar ~ .fixed,
 .ui.visible.wide.left.sidebar ~ .pusher {
   transform: translate3d(@wideWidth, 0, 0);
 }
-
 .ui.visible[class*="very wide"].left.sidebar ~ .fixed,
 .ui.visible[class*="very wide"].left.sidebar ~ .pusher {
   transform: translate3d(@veryWideWidth, 0, 0);
 }
 
 /* Right Visible */
-.ui.visible.thin.right.sidebar ~ .fixed,
-.ui.visible.thin.right.sidebar ~ .pusher {
-  transform: translate3d(-@thinWidth, 0, 0);
-}
-
 .ui.visible[class*="very thin"].right.sidebar ~ .fixed,
 .ui.visible[class*="very thin"].right.sidebar ~ .pusher {
   transform: translate3d(-@veryThinWidth, 0, 0);
 }
-
+.ui.visible.thin.right.sidebar ~ .fixed,
+.ui.visible.thin.right.sidebar ~ .pusher {
+  transform: translate3d(-@thinWidth, 0, 0);
+}
 .ui.visible.wide.right.sidebar ~ .fixed,
 .ui.visible.wide.right.sidebar ~ .pusher {
   transform: translate3d(-@wideWidth, 0, 0);
 }
-
 .ui.visible[class*="very wide"].right.sidebar ~ .fixed,
 .ui.visible[class*="very wide"].right.sidebar ~ .pusher {
   transform: translate3d(-@veryWideWidth, 0, 0);
 }
+
+
 
 /*******************************
           Animations
@@ -350,15 +337,12 @@ html.ios body {
 .ui.left.overlay.sidebar {
   transform: translate3d(-100%, 0%, 0);
 }
-
 .ui.right.overlay.sidebar {
   transform: translate3d(100%, 0%, 0);
 }
-
 .ui.top.overlay.sidebar {
   transform: translate3d(0%, -100%, 0);
 }
-
 .ui.bottom.overlay.sidebar {
   transform: translate3d(0%, 100%, 0);
 }
@@ -373,15 +357,12 @@ html.ios body {
 .ui.visible.left.overlay.sidebar {
   transform: translate3d(0%, 0%, 0);
 }
-
 .ui.visible.right.overlay.sidebar {
   transform: translate3d(0%, 0%, 0);
 }
-
 .ui.visible.top.overlay.sidebar {
   transform: translate3d(0%, 0%, 0);
 }
-
 .ui.visible.bottom.overlay.sidebar {
   transform: translate3d(0%, 0%, 0);
 }
@@ -391,6 +372,8 @@ html.ios body {
 .ui.visible.overlay.sidebar ~ .pusher {
   transform: none !important;
 }
+
+
 
 /*--------------
       Push
@@ -406,15 +389,12 @@ html.ios body {
 .ui.left.push.sidebar {
   transform: translate3d(-100%, 0, 0);
 }
-
 .ui.right.push.sidebar {
   transform: translate3d(100%, 0, 0);
 }
-
 .ui.top.push.sidebar {
   transform: translate3d(0%, -100%, 0);
 }
-
 .ui.bottom.push.sidebar {
   transform: translate3d(0%, 100%, 0);
 }
@@ -423,6 +403,7 @@ html.ios body {
 .ui.visible.push.sidebar {
   transform: translate3d(0%, 0, 0);
 }
+
 
 /*--------------
     Uncover
@@ -440,6 +421,7 @@ html.ios body {
   transition: transform @duration @easing;
 }
 
+
 /*--------------
    Slide Along
 ---------------*/
@@ -453,15 +435,12 @@ html.ios body {
 .ui.left.slide.along.sidebar {
   transform: translate3d(-50%, 0, 0);
 }
-
 .ui.right.slide.along.sidebar {
   transform: translate3d(50%, 0, 0);
 }
-
 .ui.top.slide.along.sidebar {
   transform: translate3d(0, -50%, 0);
 }
-
 .ui.bottom.slide.along.sidebar {
   transform: translate3d(0%, 50%, 0);
 }
@@ -476,6 +455,7 @@ html.ios body {
   transform: translate3d(0%, 0, 0);
 }
 
+
 /*--------------
    Slide Out
 ---------------*/
@@ -489,15 +469,12 @@ html.ios body {
 .ui.left.slide.out.sidebar {
   transform: translate3d(50%, 0, 0);
 }
-
 .ui.right.slide.out.sidebar {
   transform: translate3d(-50%, 0, 0);
 }
-
 .ui.top.slide.out.sidebar {
   transform: translate3d(0%, 50%, 0);
 }
-
 .ui.bottom.slide.out.sidebar {
   transform: translate3d(0%, -50%, 0);
 }
@@ -526,15 +503,12 @@ html.ios body {
 .ui.left.scale.down.sidebar {
   transform: translate3d(-100%, 0, 0);
 }
-
 .ui.right.scale.down.sidebar {
   transform: translate3d(100%, 0, 0);
 }
-
 .ui.top.scale.down.sidebar {
   transform: translate3d(0%, -100%, 0);
 }
-
 .ui.bottom.scale.down.sidebar {
   transform: translate3d(0%, 100%, 0);
 }
@@ -543,15 +517,12 @@ html.ios body {
 .ui.scale.down.left.sidebar ~ .pusher {
   transform-origin: 75% 50%;
 }
-
 .ui.scale.down.right.sidebar ~ .pusher {
   transform-origin: 25% 50%;
 }
-
 .ui.scale.down.top.sidebar ~ .pusher {
   transform-origin: 50% 75%;
 }
-
 .ui.scale.down.bottom.sidebar ~ .pusher {
   transform-origin: 50% 25%;
 }
@@ -560,20 +531,18 @@ html.ios body {
 .ui.animating.scale.down > .visible.ui.sidebar {
   transition: transform @duration @easing;
 }
-
 .ui.visible.scale.down.sidebar ~ .pusher,
 .ui.animating.scale.down.sidebar ~ .pusher {
   display: block !important;
   width: 100%;
   height: 100%;
-  overflow: hidden !important;
+  overflow: hidden;
 }
 
 /* End */
 .ui.visible.scale.down.sidebar {
   transform: translate3d(0, 0, 0);
 }
-
 .ui.visible.scale.down.sidebar ~ .pusher {
   transform: scale(0.75);
 }

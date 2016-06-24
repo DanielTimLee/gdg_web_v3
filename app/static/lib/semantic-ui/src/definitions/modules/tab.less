@@ -3,18 +3,19 @@
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
 
+
 /*******************************
             Theme
 *******************************/
 
-@type: 'module';
-@element: 'tab';
+@type    : 'module';
+@element : 'tab';
 
 @import (multiple) '../../theme.config';
 
@@ -49,7 +50,6 @@
   display: block;
   min-height: @loadingMinHeight;
 }
-
 .ui.tab.loading * {
   position: @loadingContentPosition !important;
   left: @loadingContentOffset !important;
@@ -69,7 +69,6 @@
   border-radius: @circularRadius;
   border: @loaderLineWidth solid @loaderFillColor;
 }
-
 .ui.tab.loading:after,
 .ui.tab.loading.segment:after {
   position: absolute;

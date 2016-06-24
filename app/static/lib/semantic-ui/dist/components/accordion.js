@@ -1,9 +1,9 @@
 /*!
- * # Semantic UI 2.1.7 - Accordion
+ * # Semantic UI 1.12.3 - Accordion
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
@@ -58,16 +58,14 @@
           instance = $module.data(moduleNamespace),
           observer,
           module
-          ;
+      ;
 
         module = {
 
           initialize: function () {
             module.debug('Initializing', $module);
             module.bind.events();
-            if (settings.observeChanges) {
-              module.observeChanges();
-            }
+            module.observeChanges();
             module.instantiate();
           },
 
@@ -83,7 +81,7 @@
             $module
               .off(eventNamespace)
               .removeData(moduleNamespace)
-            ;
+          ;
           },
 
           refresh: function () {
@@ -108,9 +106,9 @@
           bind: {
             events: function () {
               module.debug('Binding delegated events');
-              $module
-                .on(settings.on + eventNamespace, selector.trigger, module.event.click)
-              ;
+            $module
+              .on('click' + eventNamespace, selector.trigger, module.event.click)
+            ;
             }
           },
 
@@ -137,10 +135,10 @@
             if (isOpen || isOpening) {
               if (settings.collapsible) {
                 module.close.call($activeTitle);
-              }
-              else {
+            }
+            else {
                 module.debug('Cannot close accordion content collapsing is disabled');
-              }
+            }
             }
             else {
               module.open.call($activeTitle);
@@ -157,26 +155,19 @@
               $activeContent = $activeTitle.next($content),
               isAnimating = $activeContent.hasClass(className.animating),
               isActive = $activeContent.hasClass(className.active),
-              isOpen = (isActive || isAnimating)
+              isUnopen = (!isActive && !isAnimating)
               ;
-            if (isOpen) {
-              module.debug('Accordion already open, skipping', $activeContent);
-              return;
-            }
+            if (isUnopen) {
             module.debug('Opening accordion content', $activeTitle);
-            settings.onOpening.call($activeContent);
-            if (settings.exclusive) {
+              if (settings.exclusive) {
               module.closeOthers.call($activeTitle);
             }
             $activeTitle
               .addClass(className.active)
             ;
-            $activeContent
-              .stop(true, true)
-              .addClass(className.animating)
-            ;
-            if (settings.animateChildren) {
-              if ($.fn.transition !== undefined && $module.transition('is supported')) {
+              $activeContent.addClass(className.animating);
+              if (settings.animateChildren) {
+                if ($.fn.transition !== undefined && $module.transition('is supported')) {
                 $activeContent
                   .children()
                   .transition({
@@ -192,7 +183,7 @@
               else {
                 $activeContent
                   .children()
-                  .stop(true, true)
+                  .stop(true)
                   .animate({
                     opacity: 1
                   }, settings.duration, module.resetOpacity)
@@ -200,6 +191,7 @@
               }
             }
             $activeContent
+              .stop(true)
               .slideDown(settings.duration, settings.easing, function () {
                 $activeContent
                   .removeClass(className.animating)
@@ -210,6 +202,7 @@
                 settings.onChange.call(this);
               })
             ;
+            }
           },
 
           close: function (query) {
@@ -227,12 +220,10 @@
               ;
             if ((isActive || isOpening) && !isClosing) {
               module.debug('Closing accordion content', $activeContent);
-              settings.onClosing.call($activeContent);
               $activeTitle
                 .removeClass(className.active)
               ;
               $activeContent
-                .stop(true, true)
                 .addClass(className.animating)
               ;
               if (settings.animateChildren) {
@@ -252,14 +243,15 @@
                 else {
                   $activeContent
                     .children()
-                    .stop(true, true)
+                    .stop(true)
                     .animate({
                       opacity: 0
                     }, settings.duration, module.resetOpacity)
                   ;
-                }
               }
+            }
               $activeContent
+                .stop(true)
                 .slideUp(settings.duration, settings.easing, function () {
                   $activeContent
                     .removeClass(className.animating)
@@ -301,10 +293,6 @@
               $openTitles
                 .removeClass(className.active)
               ;
-              $openContents
-                .removeClass(className.animating)
-                .stop(true, true)
-              ;
               if (settings.animateChildren) {
                 if ($.fn.transition !== undefined && $module.transition('is supported')) {
                   $openContents
@@ -321,14 +309,15 @@
                 else {
                   $openContents
                     .children()
-                    .stop(true, true)
+                    .stop()
                     .animate({
                       opacity: 0
                     }, settings.duration, module.resetOpacity)
                   ;
-                }
+              }
               }
               $openContents
+                .stop()
                 .slideUp(settings.duration, settings.easing, function () {
                   $(this).removeClass(className.active);
                   module.reset.display.call(this);
@@ -346,9 +335,9 @@
                 $(this)
                   .attr('style', '')
                   .removeAttr('style')
-                ;
-              }
-            },
+              ;
+            }
+          },
 
             opacity: function () {
               module.verbose('Removing inline opacity from element', this);
@@ -359,7 +348,7 @@
                   .removeAttr('style')
                 ;
               }
-            },
+          },
 
           },
 
@@ -380,10 +369,10 @@
             if (value !== undefined) {
               if ($.isPlainObject(name)) {
                 $.extend(true, module, name);
-              }
+            }
               else {
                 module[name] = value;
-              }
+            }
             }
             else {
               return module[name];
@@ -394,21 +383,21 @@
               if (settings.performance) {
                 module.performance.log(arguments);
               }
-              else {
+            else {
                 module.debug = Function.prototype.bind.call(console.info, console, settings.name + ':');
                 module.debug.apply(console, arguments);
-              }
+            }
             }
           },
           verbose: function () {
             if (settings.verbose && settings.debug) {
               if (settings.performance) {
                 module.performance.log(arguments);
-              }
-              else {
+            }
+            else {
                 module.verbose = Function.prototype.bind.call(console.info, console, settings.name + ':');
                 module.verbose.apply(console, arguments);
-              }
+            }
             }
           },
           error: function () {
@@ -435,8 +424,8 @@
                 });
               }
               clearTimeout(module.performance.timer);
-              module.performance.timer = setTimeout(module.performance.display, 500);
-            },
+              module.performance.timer = setTimeout(module.performance.display, 100);
+          },
             display: function () {
               var
                 title = settings.name + ':',
@@ -455,14 +444,14 @@
                 console.groupCollapsed(title);
                 if (console.table) {
                   console.table(performance);
-                }
-                else {
+              }
+              else {
                   $.each(performance, function (index, data) {
                     console.log(data['Name'] + ': ' + data['Execution Time'] + 'ms');
                   });
-                }
-                console.groupEnd();
               }
+                console.groupEnd();
+            }
               performance = [];
             }
           },
@@ -485,30 +474,30 @@
                   ;
                 if ($.isPlainObject(object[camelCaseValue]) && (depth != maxDepth)) {
                   object = object[camelCaseValue];
-                }
+              }
                 else if (object[camelCaseValue] !== undefined) {
                   found = object[camelCaseValue];
                   return false;
-                }
+              }
                 else if ($.isPlainObject(object[value]) && (depth != maxDepth)) {
                   object = object[value];
-                }
+              }
                 else if (object[value] !== undefined) {
                   found = object[value];
                   return false;
-                }
+              }
                 else {
                   module.error(error.method, query);
                   return false;
-                }
+              }
               });
-            }
+          }
             if ($.isFunction(found)) {
               response = found.apply(context, passedArguments);
-            }
+          }
             else if (found !== undefined) {
               response = found;
-            }
+          }
             if ($.isArray(returnedValue)) {
               returnedValue.push(response);
             }
@@ -523,8 +512,8 @@
         };
         if (methodInvoked) {
           if (instance === undefined) {
-            module.initialize();
-          }
+          module.initialize();
+        }
           module.invoke(query);
         }
         else {
@@ -547,32 +536,23 @@
     namespace: 'accordion',
 
     debug: false,
-    verbose: false,
+    verbose: true,
     performance: true,
 
-    on: 'click', // event on title that opens accordion
+    exclusive: true,
+    collapsible: true,
+    closeNested: false,
+    animateChildren: true,
 
-    observeChanges: true,  // whether accordion should automatically refresh on DOM insertion
+    duration: 350,
+    easing: 'easeOutQuad',
 
-    exclusive: true,  // whether a single accordion content panel should be open at once
-    collapsible: true,  // whether accordion content can be closed
-    closeNested: false, // whether nested content should be closed when a panel is closed
-    animateChildren: true,  // whether children opacity should be animated
-
-    duration: 350, // duration of animation
-    easing: 'easeOutQuad', // easing equation for animation
-
-
-    onOpening: function () {
-    }, // callback before open animation
     onOpen: function () {
-    }, // callback after open animation
-    onClosing: function () {
-    }, // callback before closing animation
+    },
     onClose: function () {
-    }, // callback after closing animation
+    },
     onChange: function () {
-    }, // callback after closing or opening animation
+    },
 
     error: {
       method: 'The method you called is not defined'

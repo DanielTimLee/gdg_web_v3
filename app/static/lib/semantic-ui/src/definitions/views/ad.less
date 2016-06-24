@@ -13,8 +13,8 @@
             Theme
 *******************************/
 
-@type: 'view';
-@element: 'ad';
+@type    : 'view';
+@element : 'ad';
 
 @import (multiple) '../../theme.config';
 
@@ -64,7 +64,6 @@
   width: 336px;
   height: 280px;
 }
-
 /* Half Page */
 .ui[class*="half page"].ad {
   width: 300px;
@@ -111,12 +110,10 @@
   width: 120px;
   height: 90px;
 }
-
 .ui[class*="square button"].ad {
   width: 125px;
   height: 125px;
 }
-
 .ui[class*="small button"].ad {
   width: 120px;
   height: 60px;
@@ -201,6 +198,8 @@
   height: 400px;
 }
 
+
+
 /*--------------
      Mobile
 ---------------*/
@@ -226,11 +225,12 @@
   display: none;
 }
 
-@media only screen and (max-width: @largestMobileScreen) {
+@media only screen and (max-width : (@tabletBreakpoint - 1)) {
   .ui.mobile.ad {
     display: block;
   }
 }
+
 
 /*******************************
            Variations
@@ -245,7 +245,6 @@
   position: relative;
   background: @testBackground;
 }
-
 .ui.test.ad:after {
   position: absolute;
   top: 50%;
@@ -259,11 +258,9 @@
   font-size: @testFontSize;
   font-weight: @testFontWeight;
 }
-
 .ui.mobile.test.ad:after {
   font-size: @testMobileFontSize;
 }
-
 .ui.test.ad[data-text]:after {
   content: attr(data-text);
 }

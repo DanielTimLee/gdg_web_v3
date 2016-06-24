@@ -3,7 +3,7 @@
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
@@ -13,8 +13,8 @@
             Theme
 *******************************/
 
-@type: 'module';
-@element: 'accordion';
+@type    : 'module';
+@element : 'accordion';
 
 @import (multiple) '../../theme.config';
 
@@ -25,8 +25,8 @@
 .ui.accordion,
 .ui.accordion .accordion {
   max-width: 100%;
+  font-size: @fontSize;
 }
-
 .ui.accordion .accordion {
   margin: @childAccordionMargin;
   padding: @childAccordionPadding;
@@ -58,7 +58,6 @@
   margin: @contentMargin;
   padding: @contentPadding;
 }
-
 .ui.accordion:not(.styled) .title ~ .content:not(.ui):last-child {
   padding-bottom: 0em;
 }
@@ -88,7 +87,6 @@
   display: block;
   padding: @menuTitlePadding;
 }
-
 .ui.accordion.menu .item .title > .dropdown.icon {
   float: @menuIconFloat;
   margin: @menuIconMargin;
@@ -132,7 +130,6 @@
   background: @styledBackground;
   box-shadow: @styledBoxShadow;
 }
-
 .ui.styled.accordion .title,
 .ui.styled.accordion .accordion .title {
   margin: @styledTitleMargin;
@@ -142,11 +139,11 @@
   border-top: @styledTitleBorder;
   transition: @styledTitleTransition;
 }
-
 .ui.styled.accordion > .title:first-child,
 .ui.styled.accordion .accordion .title:first-child {
   border-top: none;
 }
+
 
 /* Content */
 .ui.styled.accordion .content,
@@ -154,11 +151,11 @@
   margin: @styledContentMargin;
   padding: @styledContentPadding;
 }
-
 .ui.styled.accordion .accordion .content {
   padding: @styledChildContentMargin;
   padding: @styledChildContentPadding;
 }
+
 
 /* Hover */
 .ui.styled.accordion .title:hover,
@@ -168,23 +165,23 @@
   background: @styledTitleHoverBackground;
   color: @styledTitleHoverColor;
 }
-
 .ui.styled.accordion .accordion .title:hover,
 .ui.styled.accordion .accordion .active.title {
   background: @styledHoverChildTitleBackground;
   color: @styledHoverChildTitleColor;
 }
 
+
 /* Active */
 .ui.styled.accordion .active.title {
   background: @styledActiveTitleBackground;
   color: @styledActiveTitleColor;
 }
-
 .ui.styled.accordion .accordion .active.title {
   background: @styledActiveChildTitleBackground;
   color: @styledActiveChildTitleColor;
 }
+
 
 /*******************************
             States
@@ -221,4 +218,3 @@
 }
 
 .loadUIOverrides();
-

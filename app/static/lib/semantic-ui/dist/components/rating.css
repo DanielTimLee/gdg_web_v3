@@ -1,102 +1,84 @@
 /*!
- * # Semantic UI 2.1.7 - Rating
+ * # Semantic UI 1.12.3 - Rating
  * http://github.com/semantic-org/semantic-ui/
  *
  *
- * Copyright 2015 Contributors
+ * Copyright 2014 Contributors
  * Released under the MIT license
  * http://opensource.org/licenses/MIT
  *
  */
+
 
 /*******************************
            Rating
 *******************************/
 
 .ui.rating {
-  display: -webkit-inline-box;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  white-space: nowrap;
-  vertical-align: baseline;
+  display: inline-block;
+  vertical-align: middle;
 }
-
 .ui.rating:last-child {
   margin-right: 0em;
 }
 
+.ui.rating:before {
+  display: block;
+  content: '';
+  visibility: hidden;
+  clear: both;
+  height: 0;
+}
+
 /* Icon */
 .ui.rating .icon {
-  padding: 0em;
+  cursor: pointer;
   margin: 0em;
+  width: 1.1em;
+  height: auto;
   text-align: center;
+  padding: 0em;
   font-weight: normal;
   font-style: normal;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 0 auto;
-  -ms-flex: 1 0 auto;
-  flex: 1 0 auto;
-  cursor: pointer;
-  width: 1.25em;
-  height: auto;
-  -webkit-transition: opacity 0.1s ease, background 0.1s ease, text-shadow 0.1s ease, color 0.1s ease;
-  transition: opacity 0.1s ease, background 0.1s ease, text-shadow 0.1s ease, color 0.1s ease;
 }
+
 
 /*******************************
              Types
 *******************************/
 
-/*-------------------
-      Standard
---------------------*/
-
-/* Inactive Icon */
-.ui.rating .icon {
-  background: transparent;
-  color: rgba(0, 0, 0, 0.15);
-}
-
-/* Active Icon */
-.ui.rating .active.icon {
-  background: transparent;
-  color: rgba(0, 0, 0, 0.85);
-}
-
-/* Selected Icon */
-.ui.rating .icon.selected,
-.ui.rating .icon.selected.active {
-  background: transparent;
-  color: rgba(0, 0, 0, 0.87);
-}
 
 /*-------------------
         Star
 --------------------*/
 
+
 /* Inactive */
 .ui.star.rating .icon {
-  width: 1.25em;
-  height: auto;
-  background: transparent;
+  width: 1.1em;
   color: rgba(0, 0, 0, 0.15);
-  text-shadow: none;
 }
 
 /* Active Star */
 .ui.star.rating .active.icon {
-  background: transparent !important;
   color: #ffe623 !important;
-  text-shadow: 0px -1px 0px #ddc507, -1px 0px 0px #ddc507, 0px 1px 0px #ddc507, 1px 0px 0px #ddc507 !important;
+  text-shadow: 0px -1px 0px #cfa300, -1px 0px 0px #cfa300, 0px 1px 0px #cfa300, 1px 0px 0px #cfa300;
 }
 
 /* Selected Star */
 .ui.star.rating .icon.selected,
 .ui.star.rating .icon.selected.active {
-  background: transparent !important;
-  color: #ffcc00 !important;
-  text-shadow: 0px -1px 0px #e6a200, -1px 0px 0px #e6a200, 0px 1px 0px #e6a200, 1px 0px 0px #e6a200 !important;
+  color: #ffb70a !important;
+}
+
+.ui.star.rating.partial {
+  position: relative;
+  z-index: 1;
+}
+
+.ui.star.rating.partial:before {
+  position: absolute;
+  z-index: -1;
 }
 
 /*-------------------
@@ -104,35 +86,47 @@
 --------------------*/
 
 .ui.heart.rating .icon {
-  width: 1.4em;
-  height: auto;
-  background: transparent;
+  width: 1.25em;
   color: rgba(0, 0, 0, 0.15);
-  text-shadow: none !important;
 }
 
 /* Active Heart */
 .ui.heart.rating .active.icon {
-  background: transparent !important;
-  color: #ff6d75 !important;
-  text-shadow: 0px -1px 0px #cd0707, -1px 0px 0px #cd0707, 0px 1px 0px #cd0707, 1px 0px 0px #cd0707 !important;
+  color: #ff2733 !important;
+  text-shadow: 0px -1px 0px #9e0000, -1px 0px 0px #9e0000, 0px 1px 0px #9e0000, 1px 0px 0px #9e0000;
 }
 
 /* Selected Heart */
 .ui.heart.rating .icon.selected,
 .ui.heart.rating .icon.selected.active {
-  background: transparent !important;
-  color: #ff3000 !important;
-  text-shadow: 0px -1px 0px #aa0101, -1px 0px 0px #aa0101, 0px 1px 0px #aa0101, 1px 0px 0px #aa0101 !important;
+  color: #ff2733 !important;
 }
+
 
 /*******************************
              States
 *******************************/
 
+/* Inactive Icon */
+.ui.rating .icon {
+  color: rgba(0, 0, 0, 0.15);
+}
+
+/* Active Icon */
+.ui.rating .active.icon {
+  color: rgba(0, 0, 0, 0.85);
+}
+
+/* Selected Icon */
+.ui.rating .icon.selected,
+.ui.rating .icon.selected.active {
+  color: rgba(0, 0, 0, 0.8);
+}
+
 /*-------------------
        Disabled
 --------------------*/
+
 
 /* disabled rating */
 .ui.disabled.rating .icon {
@@ -140,48 +134,49 @@
 }
 
 /*-------------------
-   User Interactive
+     Interacting (Active)
 --------------------*/
+
 
 /* Selected Rating */
 .ui.rating.selected .active.icon {
-  opacity: 1;
+  opacity: 0.5;
 }
-
 .ui.rating.selected .icon.selected,
 .ui.rating .icon.selected {
   opacity: 1;
 }
 
+
 /*******************************
           Variations
 *******************************/
 
-.ui.mini.rating {
-  font-size: 0.71428571rem;
+.ui.mini.rating .icon {
+  font-size: 0.7rem;
 }
 
-.ui.tiny.rating {
-  font-size: 0.85714286rem;
+.ui.tiny.rating .icon {
+  font-size: 0.8rem;
 }
 
-.ui.small.rating {
-  font-size: 0.92857143rem;
+.ui.small.rating .icon {
+  font-size: 0.875rem;
 }
 
-.ui.rating {
+.ui.rating .icon {
   font-size: 1rem;
 }
 
-.ui.large.rating {
-  font-size: 1.14285714rem;
+.ui.large.rating .icon {
+  font-size: 1.1rem;
 }
 
-.ui.huge.rating {
-  font-size: 1.42857143rem;
+.ui.huge.rating .icon {
+  font-size: 1.5rem;
 }
 
-.ui.massive.rating {
+.ui.massive.rating .icon {
   font-size: 2rem;
 }
 
@@ -195,7 +190,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 .ui.rating .icon {
   font-family: 'Rating';
   line-height: 1;
@@ -234,7 +228,6 @@
 .ui.star.rating .partial.icon:before {
   content: '\f006';
 }
-
 .ui.star.rating .partial.icon {
   content: '\f005';
 }
@@ -251,7 +244,6 @@
 .ui.heart.rating .icon:before {
   content: '\f004';
 }
-
 /* Active */
 .ui.heart.rating .active.icon:before {
   content: '\f004';
