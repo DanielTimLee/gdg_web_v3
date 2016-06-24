@@ -8,7 +8,6 @@
 {% block content %}
   <div class="ui vertical masthead center aligned segment" style="margin:0px 0px; padding-bottom:4em;">
     <div class="ui text container">
-
       <h2 class="ui center aligned medium icon header" style="padding:3em 0em;">
         <i class="ticket icon"></i>
         <div class="content">
@@ -16,309 +15,35 @@
           <div class="sub header">서울시의 소상공인 사업 활성화를 위한 GDG SSU의 프로젝트!</div>
         </div>
       </h2>
-
-
-
       <div class="ui center aligned grid">
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
+        {% for coupon in coupons %}
+          <div class="four wide column">
+            <a class="ui card" href="{{ url_for('coupon_view',coupon_id=coupon.id) }}">
+              <div class="image">
+                <div class="ui red ribbon label">고기 전문점</div>
+                <img src="{{ url_for('static',filename='images/coupon/'+coupon.company_thumb) }}">
               </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
+              <div class="content">
+                <div class="header">{{ coupon.company }}</div>
+                <div class="description">
+                  {{ coupon.company_desc }}<br><br>
+                  {{ coupon.company_addr }}<br><br>
+                  <i class="wait icon"></i>
+                  {{ coupon.company_open_hour }}
+                </div>
+                <div class="meta">
+                  <span class="date">{{ coupon.created_date | humanize }} 업데이트 됨</span>
+                </div>
               </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
+              <div class="extra content">
+                <div>
+                  <i class="arrow right icon"></i>
+                  쿠폰 받으러 가기
+                </div>
+              </div>
+            </a>
           </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="four wide column">
-          <div class="ui card">
-            <div class="image">
-              <a class="ui red ribbon label">고기 전문점</a>
-              <img src="{{ url_for('static',filename='images/coupon/01.jpeg') }}">
-            </div>
-            <div class="content">
-              <a class="header">풍년집</a>
-              <div class="meta">
-                <span class="date">2016.06 updated</span>
-              </div>
-              <div class="description">
-                풍년집은 숭실대 앞의 고기 전문점 입니다.
-              </div>
-            </div>
-            <div class="extra content">
-              <a>
-                <i class="user icon"></i>
-                오전 11시 30분 ~ 새벽 1시
-              </a>
-            </div>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>

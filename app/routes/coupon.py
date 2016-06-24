@@ -1,10 +1,9 @@
 import os
-from app import app, db
-from app.models.coupon import CouponModel
+from app import app
 from app.helper.util import login_required
+from app.models.coupon import CouponModel
+from flask import request, render_template
 from werkzeug.utils import secure_filename
-from flask import Flask, request, redirect, render_template, flash, url_for, session
-
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
@@ -20,9 +19,16 @@ def coupon_home():
 
 @app.route('/coupon/list')
 def coupon_list():
-    coupons = CouponModel.query.all()
+    type = request.args.get('type')
 
-    return render_template('coupon/pages/list.html')
+    coupons_query = CouponModel.query
+
+    if type:
+        coupons_query = coupons_query.filter(CouponModel.company_type == type)
+
+    coupons = coupons_query.all()
+
+    return render_template('coupon/pages/list.html', coupons=coupons)
 
 
 @app.route('/coupon/add', methods=['GET','POST'])
