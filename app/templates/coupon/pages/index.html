@@ -1,0 +1,34 @@
+{% extends 'coupon/layout.html' %}
+
+{% block title %}GDG-Charger!{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+  <div class="ui vertical masthead center aligned segment" style="margin:0px 0px; padding:10em 0em">
+    <div class="ui text container">
+      <div class="ui medium image">
+        <img src="{{ url_for('static', filename='images/coupon/i_seoul.jpg') }}">
+      </div>
+      <h1 class="ui header">
+        <i class="plug icon"></i>
+        GDG Charger!
+      </h1>
+      <h2>서울시의 소상공인 사업 활성화를 위한 GDG SSU의 프로젝트!</h2>
+
+      <a href="{{ url_for('coupon_list') }}" class="ui animated fade teal basic button"
+         style="margin:3em 0em;">
+        <div class="visible content">
+          <strong>쿠폰 출력하러 가기</strong>
+        </div>
+        <div class="hidden content">
+          <i class="arrow right icon"></i>
+        </div>
+      </a>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

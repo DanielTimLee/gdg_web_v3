@@ -1,0 +1,77 @@
+{% extends 'coupon/layout.html' %}
+
+{% block title %}GDG-Charger!{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+  <div class="ui vertical masthead center aligned segment" style="margin:0px 0px; padding-bottom:4em;">
+    <div class="ui text container">
+
+      <h2 class="ui center aligned medium icon header" style="padding:3em 0em;">
+        <i class="ticket icon"></i>
+        <div class="content">
+          GDG Charger
+          <div class="sub header">서울시의 소상공인 사업 활성화를 위한 GDG SSU의 프로젝트!</div>
+        </div>
+      </h2>
+
+
+      <div id="company-data"
+           data-company="{{ coupon.company }}"
+           data-company-addr="{{ coupon.company_addr }}"
+           data-company-desc="{{ coupon.company_desc }}"
+           data-company-phone="{{ coupon.company_phone }}"
+           data-company-open_hour="{{ coupon.company_open_hour }}">
+        <div class="ui stackable center aligned grid">
+          <div class="four wide column">
+            <div class="ui card">
+              <div class="image">
+                <a class="ui red ribbon label">고기 전문점</a>
+                <img src="{{ url_for('static',filename='images/coupon/01.jpg') }}">
+              </div>
+              <div class="content">
+                <a class="header">{{ coupon.company }}</a>
+                <div class="description">
+                  {{ coupon.company_desc }}<br><br>
+                  {{ coupon.company_addr }}<br><br>
+                  <i class="wait icon"></i>
+                  {{ coupon.company_open_hour }}
+                </div>
+                <div class="meta">
+                  <span class="date">{{ coupon.created_date | humanize }} 업데이트 됨</span>
+                </div>
+              </div>
+              <div class="extra content">
+                <a>
+                  모든 메뉴보기
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="ten wide column">
+            <div class="ui segment">
+              <h2 class="ui header">
+                {{ coupon.coupon_content }}
+                <div class="sub header">{{ coupon.coupon_price }}₩</div>
+              </h2>
+            </div>
+            <br>
+            <div class="ui embeded">
+              <div id="google_map" style="width:100%; height:500px;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript" src="{{ url_for('static', filename='lib/jquery/1.7.1.js') }}"></script>
+  <script type="text/javascript" src="https://maps.google.com/maps/api/js?v=3.exp&region=KR&key=AIzaSyCfFoY7oVGrcmsqRZxo62nagzAnWP-ECIw"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/coupon_map.js') }}"></script>
+{% endblock %}
+
+

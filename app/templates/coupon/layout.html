@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>GDG SSU - {% block title %}{% endblock %}</title>
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='lib/semantic-ui/dist/semantic.min.css') }}"/>
+
+  {% block style %}
+  {% endblock %}
+</head>
+<body>
+
+{% include 'flash.html' %}
+
+{% block navbar %}
+  {% include 'coupon/navbar.html' %}
+{% endblock %}
+
+{% block image_content %}
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+
+</body>
+</html>

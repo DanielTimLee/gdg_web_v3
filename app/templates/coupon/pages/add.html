@@ -1,0 +1,34 @@
+{% extends 'coupon/layout.html' %}
+
+{% block title %}GDG-Charger!{% endblock %}
+
+{% block style %}
+{% endblock %}
+
+{% block content %}
+  <div class="ui vertical masthead center aligned segment" style="margin:0px 0px; padding-bottom:4em;">
+    <div class="ui text container">
+
+      <h2 class="ui center aligned medium icon header" style="padding:3em 0em;">
+        <i class="ticket icon"></i>
+        <div class="content">
+          GDG Charger
+          <div class="sub header">서울시의 소상공인 사업 활성화를 위한 GDG SSU의 프로젝트!</div>
+        </div>
+      </h2>
+      <div class="ui center aligned grid">
+        <div class="four wide column">
+          <form action="{{ request.url }}">
+            <input type="file" />
+            <button type="submit"></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+
