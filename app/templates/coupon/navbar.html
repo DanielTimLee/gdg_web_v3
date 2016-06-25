@@ -1,11 +1,12 @@
 <div class="ui top fixed inverted segment" style="padding: 0em;margin: 0em">
   <div class="ui container">
     <div class="ui borderless inverted menu">
-      <a class="item" href="{{ url_for('coupon_home') }}">
-        <img class="ui tiny image" src="{{ url_for('static', filename='images/logo1.png') }}">
+      <a class="hamburger item">
+        <i class="sidebar icon"></i>
       </a>
-
-      <div class="right menu">
+      <img class="ui tiny image item" src="{{ url_for('static', filename='images/logo1.png') }}"
+           style="margin-top:auto;margin-bottom:auto;"/>
+      <div class="right item">
         <a class="item" href="{{ url_for('coupon_home') }}">
           Home
         </a>
@@ -18,6 +19,4 @@
       </div>
     </div>
   </div>
-
 </div>
-

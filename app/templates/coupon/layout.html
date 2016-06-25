@@ -2,10 +2,17 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name=”format-detection” content=”telephone=no”>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GDG SSU - {% block title %}{% endblock %}</title>
 
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='lib/semantic-ui/dist/semantic.min.css') }}"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet/coupon/navbar.min.css') }}"/>
+
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  <script type="text/javascript"
+          src="{{ url_for('static', filename='lib/semantic-ui/dist/semantic.min.js') }}"></script>
 
   {% block style %}
   {% endblock %}
@@ -14,21 +21,34 @@
 
 {% include 'flash.html' %}
 
-{% block navbar %}
-  {% include 'coupon/navbar.html' %}
+{% block sidebar %}
+  {% include 'coupon/sidebar.html' %}
 {% endblock %}
 
-{% block image_content %}
-{% endblock %}
+<div class="pusher">
+  {% block navbar %}
+    {% include 'coupon/navbar.html' %}
+  {% endblock %}
 
-{% block content %}
-{% endblock %}
+  {% block image_content %}
+  {% endblock %}
 
-{% block footer %}
-{% endblock %}
+  {% block content %}
+  {% endblock %}
+
+  {% block footer %}
+  {% endblock %}
+</div>
 
 {% block script %}
 {% endblock %}
+
+<script>
+  function callNumber(num) {
+    location.href = "tel:" + num;
+  }
+  $('.ui.sidebar').sidebar('attach events', '.hamburger.item');
+</script>
 
 
 </body>

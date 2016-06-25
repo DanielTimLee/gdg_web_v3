@@ -59,3 +59,27 @@ def humanize(time):
 def id_to_nickname(user_id):
     user = UserModel.query.filter_by(id=user_id).one()
     return user.nickname
+
+
+@app.add_template_filter
+def select_label(label):
+    if label == "korean":
+        return """<div class="ui red ribbon label">한식 전문점</div>"""
+
+    elif label == "chinese":
+        return """<div class="ui blue ribbon label">중국 음식점</div>"""
+
+    elif label == "pizza":
+        return """<div class="ui yellow ribbon label">피자 음식점</div>"""
+
+    elif label == "snack":
+        return """<div class="ui orange ribbon label">스낵 음식점</div>"""
+
+    elif label == "fusion":
+        return """<div class="ui teal ribbon label">퓨전 음식점</div>"""
+
+    elif label == "japanese":
+        return """<div class="ui green ribbon label">일식 음식점</div>"""
+
+    elif label == "chicken":
+        return """<div class="ui olive ribbon label">일식 음식점</div>"""

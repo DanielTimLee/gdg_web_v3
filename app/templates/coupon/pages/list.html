@@ -12,16 +12,18 @@
         <i class="ticket icon"></i>
         <div class="content">
           GDG Charger
-          <div class="sub header">서울시의 소상공인 사업 활성화를 위한 GDG SSU의 프로젝트!</div>
+          <div class="sub header">서울시의 소상공인 사업 활성화를 위한<br> GDG SSU의 프로젝트!</div>
         </div>
       </h2>
-      <div class="ui center aligned grid">
+
+      <div class="ui stackable center aligned four column grid">
         {% for coupon in coupons %}
-          <div class="four wide column">
-            <a class="ui card" href="{{ url_for('coupon_view',coupon_id=coupon.id) }}">
+          <div class="column">
+            <a class="ui card" href="{{ url_for('coupon_view',coupon_id=coupon.id) }}"
+               style="margin-left:auto;margin-right:auto;">
               <div class="image">
-                <div class="ui red ribbon label">고기 전문점</div>
-                <img src="{{ url_for('static',filename='images/coupon/'+coupon.company_thumb) }}">
+                {{ coupon.company_type | select_label | safe }}
+                <img src="{{ url_for('static',filename='images/coupon/'+coupon.company_thumb) }}" style="height:165px;">
               </div>
               <div class="content">
                 <div class="header">{{ coupon.company }}</div>

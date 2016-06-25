@@ -1,0 +1,36 @@
+$break-large: 700px;
+
+.ui.container {
+
+  .img.item {
+    height: 62px;
+  }
+
+  > .menu {
+    > .hamburger.item {
+      display: none;
+    }
+    > .right.item {
+      display: inline-block;
+    }
+  }
+}
+
+@media only screen and (max-width: $break-large) {
+  .ui.container {
+
+    .img.item {
+      height: 36px;
+
+    }
+    > .menu {
+
+      > .hamburger.item {
+        display: inline-block;
+      }
+      > .right.item {
+        display: none;
+      }
+    }
+  }
+}
